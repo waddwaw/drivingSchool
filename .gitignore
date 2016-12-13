@@ -1,0 +1,8 @@
+bin/
+local.properties
+gen/
+.classpath
+.idea/
+.project
+HelloWorldSpringMVC.iml
+target/
