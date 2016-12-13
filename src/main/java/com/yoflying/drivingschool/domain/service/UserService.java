@@ -20,11 +20,4 @@ public interface UserService  {
      */
     User authentication(String user, String pwd);
 
-    /**
-     * 根据用户名查询用户
-     * 
-     * @param username
-     * @return
-     */
-    User selectByUsername(String username);
 }

@@ -3,6 +3,8 @@ package com.yoflying.drivingschool.domain.service.impl;
 import com.yoflying.drivingschool.domain.dao.RoleMapper;
 import com.yoflying.drivingschool.domain.model.Role;
 import com.yoflying.drivingschool.domain.service.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,7 +16,7 @@ import java.util.List;
  * @author StarZou
  * @since 2014年6月10日 下午4:16:33
  */
-@Service
+@Repository
 public class RoleServiceImpl  implements RoleService {
 
     @Resource

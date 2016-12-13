@@ -13,12 +13,12 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-    <!-- 扫描controller（controller层注入） -->
-    <!--<context:annotation-config/>-->
+     <!--扫描controller（controller层注入）-->
+    <context:annotation-config/>
 
 
-    <!-- 使Spring支持自动检测组件，如注解的 Controller -->
-    <!--<context:component-scan base-package="com.yoflying.drivingschool.**"/>-->
+     <!--使Spring支持自动检测组件，如注解的 Controller-->
+    <context:component-scan base-package="com.yoflying.drivingschool.**"/>
 
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
         <!--<property name="prefix" value="/WEB-INF/pages/"/>-->

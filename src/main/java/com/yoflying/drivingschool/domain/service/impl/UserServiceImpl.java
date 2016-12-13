@@ -4,7 +4,10 @@ import com.yoflying.drivingschool.domain.dao.UserMapper;
 import com.yoflying.drivingschool.domain.model.User;
 import com.yoflying.drivingschool.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -13,10 +16,10 @@ import org.springframework.stereotype.Service;
  * @author StarZou
  * @since 2014年7月5日 上午11:54:24
  */
-@Service
+@Repository
 public class UserServiceImpl  implements UserService {
 
-    @Autowired
+    @Resource
     UserMapper userMapper;
 
     public User authentication(String user, String pwd) {

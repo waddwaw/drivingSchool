@@ -11,7 +11,7 @@
 
     <!--自动扫描Mybatis接口-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.yoflying.drivingschool.domain"/>
+        <property name="basePackage" value="com.yoflying.drivingschool.domain.dao"/>
     </bean>
 
     <!-- 属性文件位置 -->

@@ -20,6 +20,8 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util.xsd">
 
+    <context:annotation-config/>
+    <context:component-scan base-package="com.yoflying.drivingschool.**"/>
 
     <bean id="annotationPropertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -106,7 +108,7 @@
     </bean>
 
     <!-- spring与mybatis整合配置，扫描所有dao -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.yoflying.drivingschool.domain"
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.yoflying.drivingschool.domain.dao"
           p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
 
     <!-- 对dataSource 数据源进行事务管理 -->
