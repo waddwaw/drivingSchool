@@ -37,6 +37,7 @@
         <shiro.version>1.2.3</shiro.version>
         <mybaits.pagehelper.version>4.1.6</mybaits.pagehelper.version>
         <mybaits.tk.mapper.version>3.3.9</mybaits.tk.mapper.version>
+        <alibaba.version>1.2.22</alibaba.version>
     </properties>
     <!--工程依赖版本信息 结束-->
     <dependencies>
@@ -250,6 +251,11 @@
             <version>${shiro.version}</version>
         </dependency>
         <!-- shiro end-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${alibaba.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

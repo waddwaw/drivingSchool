@@ -25,6 +25,6 @@ public interface PermissionMapper {
      */
     @Select("SELECT permission.id,permission.permission_name,permission.permission_sign,permission.description " +
             "FROM permission, role_permission " +
-            "WHERE role_permission.id = #{roleId} and role_permission.permission_id = permission.id ")
+            "WHERE role_permission.role_id = #{roleId} and role_permission.permission_id = permission.id ")
     List<Permission> selectPermissionsByRoleId(@Param("roleId") Long roleId);
 }

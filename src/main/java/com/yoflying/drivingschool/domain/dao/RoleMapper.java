@@ -25,6 +25,6 @@ public interface RoleMapper {
      * @return
      */
     @Select("SELECT role.id,role.role_name,role.role_sign,role.description FROM role, user_role " +
-            "WHERE user_role.user_id = #{userId} and role.id = user_role.user_id ")
+            "WHERE user_role.user_id = #{userId} and role.id = user_role.role_id ")
     List<Role> selectRolesByUserId(@Param("userId") Long userId);
 }

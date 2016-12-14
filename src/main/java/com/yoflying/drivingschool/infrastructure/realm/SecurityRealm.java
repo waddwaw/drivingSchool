@@ -5,10 +5,6 @@ import com.yoflying.drivingschool.domain.service.CoachStudentService;
 import com.yoflying.drivingschool.domain.service.ManageUserService;
 import com.yoflying.drivingschool.domain.service.PermissionService;
 import com.yoflying.drivingschool.domain.service.RoleService;
-import com.yoflying.drivingschool.domain.service.impl.PermissionServiceImpl;
-import com.yoflying.drivingschool.domain.service.impl.RoleServiceImpl;
-import com.yoflying.drivingschool.domain.service.impl.UserServiceImpl;
-import com.yoflying.drivingschool.infrastructure.interceptor.CoachStudentInterceptor;
 import com.yoflying.drivingschool.infrastructure.token.RestAccessToken;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -70,11 +66,13 @@ public class SecurityRealm extends AuthorizingRealm {
         final List<Role> roleInfos = roleService.selectRolesByUserId(user.getId());
         for (Role role : roleInfos) {
             // 添加角色
+            logger.debug("secruity" + role.toString());
             authorizationInfo.addRole(role.getRole_sign());
 
             final List<Permission> permissions = permissionService.selectPermissionsByRoleId(role.getId());
             for (Permission permission : permissions) {
                 // 添加权限
+                logger.debug("secruity" + permission.toString());
                 authorizationInfo.addStringPermission(permission.getPermission_sign());
             }
         }
@@ -107,7 +105,6 @@ public class SecurityRealm extends AuthorizingRealm {
         if (token instanceof RestAccessToken) {
             RestAccessToken restAccessToken = (RestAccessToken) token;
 
-            //默认账户为手机号码
              CoachStudentUser coachStudent = coachStudentService.authentication(restAccessToken.getUsername(),
                     restAccessToken.getUsername());
 

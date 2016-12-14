@@ -1,4 +1,4 @@
-package com.yoflying.drivingschool;
+package com.yoflying.drivingschool.management;
 
 import com.yoflying.drivingschool.domain.model.ManageUser;
 import org.apache.shiro.SecurityUtils;
@@ -7,7 +7,7 @@ import org.apache.shiro.subject.Subject;
 /**
  * Created by liqiang on 16/12/13.
  */
-public class BaseControllet {
+public class BaseManageControllet {
 
     /**
      * 获取管理员信息
