@@ -50,7 +50,7 @@ public class CoachStudentController {
         token.setRememberMe(true);
         try {
             subject.login(token);
-            SecurityUtils.getSubject().getSession().setTimeout(1000 * 10);
+            SecurityUtils.getSubject().getSession().setTimeout(1000 * 11);
 
         }catch (AuthenticationException e) {
             token.clear();

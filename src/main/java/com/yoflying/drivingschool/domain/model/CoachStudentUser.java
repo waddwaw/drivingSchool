@@ -6,6 +6,9 @@ import java.sql.Timestamp;
  * Created by arvin on 2016/12/14.
  */
 public class CoachStudentUser {
+    public final static int COACH = 1;
+    public final static int STUDENT = 2;
+
     private Long id;
     private String username;
     private String password;
@@ -13,7 +16,7 @@ public class CoachStudentUser {
     private String name;
     private Integer sex;
     private String identityCard;
-    private Integer discern;
+    private int discern;
     private String phone;
     private String wechat;
     private String address;

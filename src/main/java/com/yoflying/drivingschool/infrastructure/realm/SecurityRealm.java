@@ -8,12 +8,15 @@ import com.yoflying.drivingschool.domain.service.RoleService;
 import com.yoflying.drivingschool.domain.service.impl.PermissionServiceImpl;
 import com.yoflying.drivingschool.domain.service.impl.RoleServiceImpl;
 import com.yoflying.drivingschool.domain.service.impl.UserServiceImpl;
+import com.yoflying.drivingschool.infrastructure.interceptor.CoachStudentInterceptor;
 import com.yoflying.drivingschool.infrastructure.token.RestAccessToken;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +32,8 @@ import java.util.Objects;
  **/
 @Component(value = "securityRealm")
 public class SecurityRealm extends AuthorizingRealm {
+
+    private final Logger logger = LoggerFactory.getLogger(SecurityRealm.class);
 
     @Autowired
     private ManageUserService manageUserService;
@@ -49,18 +54,27 @@ public class SecurityRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        User user = (User) principals.getPrimaryPrincipal();
 
+        //学员or教练 权限验证逻辑
+        if (principals.getPrimaryPrincipal() instanceof CoachStudentUser) {
+            CoachStudentUser coachStudentUser = (CoachStudentUser) principals.getPrimaryPrincipal();
+            if (coachStudentUser.getDiscern() == CoachStudentUser.COACH) {
+                authorizationInfo.addRole(RoleSign.COACH);
+            }else if (coachStudentUser.getDiscern() == CoachStudentUser.STUDENT) {
+                authorizationInfo.addRole(RoleSign.STUDENT);
+            }
+            return authorizationInfo;
+        }
+
+        ManageUser user = (ManageUser) principals.getPrimaryPrincipal();
         final List<Role> roleInfos = roleService.selectRolesByUserId(user.getId());
         for (Role role : roleInfos) {
             // 添加角色
-            System.err.println(role);
             authorizationInfo.addRole(role.getRole_sign());
 
             final List<Permission> permissions = permissionService.selectPermissionsByRoleId(role.getId());
             for (Permission permission : permissions) {
                 // 添加权限
-                System.err.println(permission);
                 authorizationInfo.addStringPermission(permission.getPermission_sign());
             }
         }

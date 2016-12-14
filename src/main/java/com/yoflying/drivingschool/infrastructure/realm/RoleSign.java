@@ -23,14 +23,14 @@ public class RoleSign {
     public static final String ADMIN = "admin";
 
     /**
-     * 客户经理 标识
+     * 教练 标识
      */
-    public static final String CONSULTANT = "consultant";
+    public static final String COACH = "coach";
 
     /**
-     * VIP客户 标识
+     * 学员 标识
      */
-    public static final String VIP_USER = "vip_user";
+    public static final String STUDENT = "student";
 
     /**
      * 商家 标识
