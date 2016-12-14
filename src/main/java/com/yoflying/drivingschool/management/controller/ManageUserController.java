@@ -39,8 +39,8 @@ public class ManageUserController extends BaseControllet {
     public String login (ModelMap map) {
 
         //// TODO: 16/12/13 返回login页面
-//        ManageUser m  = manageUserService.authentication("", "");
-
+        ManageUser m  = manageUserService.authentication("", "");
+        map.put("test", "test");
         return "/manage/index.ftl";
     }
 
@@ -48,7 +48,7 @@ public class ManageUserController extends BaseControllet {
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult<String> loginPost (UsernamePasswordToken token) {
-        logger.info(token.getUsername() + "---------" + token.getHost());
+        logger.info("manage" + token.getUsername() + "---------" + token.getHost());
 
         if (StringUtils.isEmpty(token.getUsername()) || StringUtils.isEmpty(token.getUsername())) {
             return new JsonResult<String>("用户密码不能为空", ErrorDef.USER_PASS_ERROR);

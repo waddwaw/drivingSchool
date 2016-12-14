@@ -1,15 +1,14 @@
 package com.yoflying.drivingschool.infrastructure.realm;
 
-import com.yoflying.drivingschool.domain.model.ManageUser;
-import com.yoflying.drivingschool.domain.model.Permission;
-import com.yoflying.drivingschool.domain.model.Role;
-import com.yoflying.drivingschool.domain.model.User;
+import com.yoflying.drivingschool.domain.model.*;
+import com.yoflying.drivingschool.domain.service.CoachStudentService;
 import com.yoflying.drivingschool.domain.service.ManageUserService;
 import com.yoflying.drivingschool.domain.service.PermissionService;
 import com.yoflying.drivingschool.domain.service.RoleService;
 import com.yoflying.drivingschool.domain.service.impl.PermissionServiceImpl;
 import com.yoflying.drivingschool.domain.service.impl.RoleServiceImpl;
 import com.yoflying.drivingschool.domain.service.impl.UserServiceImpl;
+import com.yoflying.drivingschool.infrastructure.token.RestAccessToken;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -33,6 +32,9 @@ public class SecurityRealm extends AuthorizingRealm {
 
     @Autowired
     private ManageUserService manageUserService;
+
+    @Autowired
+    private CoachStudentService coachStudentService;
 
     @Autowired
     private RoleService roleService;
@@ -82,14 +84,24 @@ public class SecurityRealm extends AuthorizingRealm {
                     usernamePasswordToken.getUsername());
 
             if (Objects.isNull(manageUser)) {
-
                 return null;
-
             } else {
-
                 return new SimpleAuthenticationInfo(manageUser, manageUser.getPassword(), this.getName());
             }
 
+        }
+        if (token instanceof RestAccessToken) {
+            RestAccessToken restAccessToken = (RestAccessToken) token;
+
+            //默认账户为手机号码
+             CoachStudentUser coachStudent = coachStudentService.authentication(restAccessToken.getUsername(),
+                    restAccessToken.getUsername());
+
+            if (Objects.isNull(coachStudent)) {
+                return null;
+            } else {
+                return new SimpleAuthenticationInfo(coachStudent, coachStudent.getPassword(), this.getName());
+            }
         }
 
         return null;

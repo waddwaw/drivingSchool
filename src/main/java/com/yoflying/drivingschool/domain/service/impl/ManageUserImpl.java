@@ -20,7 +20,6 @@ public class ManageUserImpl implements ManageUserService{
     ManageUserMapper manageUserMapper;
 
     public ManageUser authentication(String user, String pwd) {
-//        return manageUserMapper.findOneByManageAndStatusAvailable(user, pwd);
-        return null;
+        return manageUserMapper.findOneByManageAndStatusAvailable(user, pwd);
     }
 }

@@ -1,7 +1,7 @@
 package com.yoflying.drivingschool.infrastructure.interceptor;
 
+import com.yoflying.drivingschool.domain.model.CoachStudentUser;
 import com.yoflying.drivingschool.domain.model.ManageUser;
-import com.yoflying.drivingschool.infrastructure.annotation.IgnoreAuthentication;
 import org.apache.http.HttpStatus;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -19,13 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 /**
- * Created by liqiang on 16/12/13.
+ * Created by arvin on 2016/12/14.
  */
-@Component(value = "managementInterceptor")
-public class ManagementInterceptor extends HandlerInterceptorAdapter {
-
-    private final Logger logger = LoggerFactory.getLogger(ManagementInterceptor.class);
-
+@Component(value = "coachStudentInterceptor")
+public class CoachStudentInterceptor extends HandlerInterceptorAdapter {
+    private final Logger logger = LoggerFactory.getLogger(CoachStudentInterceptor.class);
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -42,11 +40,11 @@ public class ManagementInterceptor extends HandlerInterceptorAdapter {
         if (!Objects.isNull(requiresPermissions) && !Objects.isNull(requiresRoles)) {
 
             Subject subject = SecurityUtils.getSubject();
-            ManageUser manageUser = (ManageUser) subject.getPrincipal();
+            CoachStudentUser coachStudent = (CoachStudentUser) subject.getPrincipal();
 
-            if (Objects.isNull(manageUser)) {
+            if (Objects.isNull(coachStudent)) {
                 if (Objects.isNull(handlerMethod.getMethodAnnotation(ResponseBody.class))) {
-                    response.sendRedirect("/manage/login");
+                    response.sendRedirect("/coachstudent/login");
                 } else {
                     response.setStatus(HttpStatus.SC_UNAUTHORIZED);
                 }
