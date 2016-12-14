@@ -31,24 +31,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/manage")
 public class ManageUserController extends BaseControllet {
     private final Logger logger = LoggerFactory.getLogger(ManageUserController.class);
+
     @Autowired
     ManageUserService manageUserService;
 
-
     @RequestMapping("/login")
-    @ResponseBody
-    public JsonResult<ManageUser> login (ModelMap map) {
+    public String login (ModelMap map) {
 
         //// TODO: 16/12/13 返回login页面
-        ManageUser m  = manageUserService.authentication("", "");
-        ManageUser m2 = new ManageUser();
-        m2.setDsPhone("110");
-        return new JsonResult<ManageUser>(m2, "ok", 200);
+//        ManageUser m  = manageUserService.authentication("", "");
+
+        return "/manage/index.ftl";
     }
 
-
-
-//  username  password  host Ip 地址
+//  username  password  host Ip地址
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult<String> loginPost (UsernamePasswordToken token) {

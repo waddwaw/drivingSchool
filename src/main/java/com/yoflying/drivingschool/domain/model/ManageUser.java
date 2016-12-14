@@ -9,10 +9,10 @@ import java.sql.Timestamp;
 
 public class ManageUser {
 
-    private long id;
+    private Long id;
     private String username;
     private String password;
-    private long dsId;
+    private Long dsId;
     private String identityCard;
     private String dsPhone;
     private int status;
