@@ -22,7 +22,7 @@ public interface DsLeaveMapper {
 
     @Update("UPDATE INTO ds_Leave SET status = #{status}"+
             ",modifyTime = NOW() " +
-            "WHERE dsId = #{dsId} and coachId = #{coachId} and dsId = #{dsId}")
+            "WHERE dsId = #{dsId} and coachId = #{coachId}")
     int updateDsLeave(@Param("status") Integer status, @Param("coachId") Long coachId, @Param("dsId") Long dsId);
 
     @Select("SELECT * FROM ds_setting WHERE dsId = #{dsId} and coachId = #{coachId}")

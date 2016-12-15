@@ -2,10 +2,14 @@ package com.yoflying.drivingschool.management.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.yoflying.drivingschool.domain.model.CoachStudentUser;
+import com.yoflying.drivingschool.domain.model.DrivingSchool;
+import com.yoflying.drivingschool.domain.model.DsLeave;
 import com.yoflying.drivingschool.management.BaseManageControllet;
 import com.yoflying.drivingschool.constdef.ErrorDef;
 import com.yoflying.drivingschool.domain.model.ManageUser;
 import com.yoflying.drivingschool.domain.service.ManageUserService;
+import com.yoflying.drivingschool.management.facade.ManageServiceFacade;
 import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -17,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +39,9 @@ public class ManageUserController extends BaseManageControllet {
 
     @Autowired
     ManageUserService manageUserService;
+
+    @Autowired
+    ManageServiceFacade manageServiceFacade;
 
     @RequestMapping("/login")
     public String login (ModelMap map) {
@@ -74,16 +82,43 @@ public class ManageUserController extends BaseManageControllet {
 //        PageHelper.startPage(1, peage);
 //        List<User> users = userMapper.byListUserName(name);
 //        long total  = ((Page) users).getTotal();
-
         ManageUser manageUser = getManageUser();
 
         return "/manage/index.ftl";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/createManage", method = RequestMethod.POST)
     @ResponseBody
-    public String create() {
-
-        return "";
+    public JsonResult createManage(@RequestBody ManageUser manageUser) {
+        int err = manageServiceFacade.createManage(manageUser);
+        return new JsonResult<String>("创建管理员成功", err);
     }
+
+    @RequestMapping(value = "/createCoachSt", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult createCoachSt(@RequestBody CoachStudentUser coachStudentUser) {
+        int err = manageServiceFacade.createCoachSt(coachStudentUser);
+        int discern = coachStudentUser.getDiscern();
+        if (discern == 1) {
+            return new JsonResult<String>("创建教练成功", err);
+        }
+        return new JsonResult<String>("创建学员成功", err);
+    }
+
+    @RequestMapping(value = "/createDrivingSchool", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult createDrivingSchool(@RequestBody DrivingSchool drivingSchool) {
+        int err = manageServiceFacade.createDrivingSchool(drivingSchool);
+
+        return new JsonResult<String>("创建驾校成功", err);
+    }
+
+    @RequestMapping(value = "/createLeave", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult createLeave(@RequestBody DsLeave dsLeave) {
+        int err = manageServiceFacade.createLeave(dsLeave);
+
+        return new JsonResult<String>("创建驾校成功", err);
+    }
+
 }

@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 public class DSSetting {
     private Long id;
     private Long dsId;
-    private JSONObject dsAppointment2;
-    private JSONObject dsAppointment3;
+    private String dsAppointment2;
+    private String dsAppointment3;
     private int status;
     private Timestamp createTime;
     private Timestamp modifyTime;
@@ -32,19 +32,19 @@ public class DSSetting {
         this.dsId = dsId;
     }
 
-    public JSONObject getDsAppointment2() {
+    public String getDsAppointment2() {
         return dsAppointment2;
     }
 
-    public void setDsAppointment2(JSONObject dsAppointment2) {
+    public void setDsAppointment2(String dsAppointment2) {
         this.dsAppointment2 = dsAppointment2;
     }
 
-    public JSONObject getDsAppointment3() {
+    public String getDsAppointment3() {
         return dsAppointment3;
     }
 
-    public void setDsAppointment3(JSONObject dsAppointment3) {
+    public void setDsAppointment3(String dsAppointment3) {
         this.dsAppointment3 = dsAppointment3;
     }
 

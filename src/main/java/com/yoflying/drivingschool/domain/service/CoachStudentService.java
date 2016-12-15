@@ -15,4 +15,6 @@ public interface CoachStudentService {
      * @return
      */
     CoachStudentUser authentication (String user, String pwd);
+
+    int insertCoachStudentUser(CoachStudentUser coachStudentUser);
 }

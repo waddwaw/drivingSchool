@@ -21,4 +21,8 @@ public class CoachStudentImpl implements CoachStudentService{
     public CoachStudentUser authentication(String user, String pwd) {
         return coachStudentUserMapper.findOneByManageAndStatusAvailable(user, pwd);
     }
+
+    public int insertCoachStudentUser(CoachStudentUser coachStudentUser) {
+        return coachStudentUserMapper.insertCoachStudentUser(coachStudentUser);
+    }
 }

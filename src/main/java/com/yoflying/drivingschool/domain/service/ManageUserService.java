@@ -16,4 +16,6 @@ public interface ManageUserService {
      * @return
      */
     ManageUser authentication (String user, String pwd);
+
+    int insertManage(ManageUser manageUser);
 }

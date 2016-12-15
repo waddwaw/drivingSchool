@@ -6,6 +6,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -29,7 +30,7 @@
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
-    <!-- 支持返回json(避免IE在ajax请求时，返回json出现下载 ) -->
+     <!--支持返回json(避免IE在ajax请求时，返回json出现下载 )-->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
             <list>
@@ -46,6 +47,27 @@
             </list>
         </property>
     </bean>
+
+    <!--<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>-->
+
+    <!--<mvc:annotation-driven>-->
+        <!--<mvc:message-converters>-->
+            <!--<bean  id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+                <!--&lt;!&ndash; True only for the blog article - a production system would set this to false to reduce-->
+                     <!--the number of bytes sent across the wire: &ndash;&gt;-->
+                <!--<property name="prettyPrint" value="true"/>-->
+                <!--<property name="supportedMediaTypes">-->
+                <!--<list>-->
+                <!--<value>text/plain;charset=UTF-8</value>-->
+                <!--<value>application/json;charset=UTF-8</value>-->
+                <!--</list>-->
+                <!--</property>-->
+            <!--</bean>-->
+            <!--<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>-->
+        <!--</mvc:message-converters>-->
+    <!--</mvc:annotation-driven>-->
+
+    <!--<task:annotation-driven/>-->
 
     <!-- static files, Javascript html images-->
     <!--<mvc:resources mapping="/contents/**" location="/contents/"/>-->

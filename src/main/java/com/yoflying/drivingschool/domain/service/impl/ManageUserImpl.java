@@ -22,4 +22,8 @@ public class ManageUserImpl implements ManageUserService{
     public ManageUser authentication(String user, String pwd) {
         return manageUserMapper.findOneByManageAndStatusAvailable(user, pwd);
     }
+
+    public int insertManage(ManageUser manageUser) {
+        return manageUserMapper.insertManage(manageUser);
+    }
 }

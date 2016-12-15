@@ -1,18 +1,18 @@
 package com.yoflying.drivingschool.domain.model;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.sql.Timestamp;
 
 /**
- * Created by liqiang on 16/12/14.
+ * Created by liqiang on 16/12/15.
  */
-public class DsLeave {
+public class CoachStudentLog {
     private Long id;
     private Long dsId;
     private Long coachId;
-    private String leaveDate2;
-    private String leaveDate3;
+    private Long studentId;
+    private Timestamp appointmentDate;
+    private Integer course;
+    private String testAddress;
     private int status;
     private Timestamp createTime;
     private Timestamp modifyTime;
@@ -41,20 +41,36 @@ public class DsLeave {
         this.coachId = coachId;
     }
 
-    public String getLeaveDate2() {
-        return leaveDate2;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setLeaveDate2(String leaveDate2) {
-        this.leaveDate2 = leaveDate2;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
-    public String getLeaveDate3() {
-        return leaveDate3;
+    public Timestamp getAppointmentDate() {
+        return appointmentDate;
     }
 
-    public void setLeaveDate3(String leaveDate3) {
-        this.leaveDate3 = leaveDate3;
+    public void setAppointmentDate(Timestamp appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public Integer getCourse() {
+        return course;
+    }
+
+    public void setCourse(Integer course) {
+        this.course = course;
+    }
+
+    public String getTestAddress() {
+        return testAddress;
+    }
+
+    public void setTestAddress(String testAddress) {
+        this.testAddress = testAddress;
     }
 
     public int getStatus() {
@@ -84,8 +100,10 @@ public class DsLeave {
 //        `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
 //        `dsId` bigint(20) NOT NULL COMMENT '驾校id',
 //        `coachId` bigint(20) NOT NULL COMMENT '教练id',
-//        `leaveDate2` JSON DEFAULT NULL COMMENT '科目二 教练请假时间 不生成预约表信息 JSON格式',
-//        `leaveDate3` JSON DEFAULT NULL COMMENT '科目三 教练请假时间 不生成预约表信息 JSON格式',
+//        `studentId` bigint(20) NOT NULL COMMENT '学员id',
+//        `appointmentDate` datetime DEFAULT NULL COMMENT '约车',
+//        `course` int(11) DEFAULT NULL COMMENT '课程1为科目一 2 为科目二 以此类推',
+//        `testAddress` varchar(250) NOT NULL COMMENT '练车地点',
 //        `status` int(11) DEFAULT NULL COMMENT '状态 1为正常 2为过期',
 //        `createTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
 //        `modifyTime` datetime DEFAULT NULL COMMENT '修改时间',
