@@ -21,9 +21,9 @@ public interface CoachStudentService {
 
     int insertCoachStudentUser(CoachStudentUser coachStudentUser);
 
-    int updateStudentBindCoach(Long dsId, Long studentsId, Long coachId);
+    int updateStudentBindCoach(Long dsId, Long studentsId, Long coachId, Integer course);
 
-    int updateCoachStudentUserStatus(Long dsId, Long coachIdStId, Integer status);
+    int updateCoachStudentUserStatus(Long dsId, Long coachIdStId, Integer status, Integer course);
 
     List<CoachStudentUser> findStByDsIdList(Long dsId);
 
