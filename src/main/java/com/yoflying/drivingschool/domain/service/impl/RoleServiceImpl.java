@@ -27,4 +27,8 @@ public class RoleServiceImpl  implements RoleService {
         return roleMapper.selectRolesByUserId(userId);
     }
 
+    public List<Role> selectRolesALL() {
+        return roleMapper.selectRolesALL();
+    }
+
 }

@@ -21,4 +21,6 @@ public interface RoleService  {
      * @return
      */
     List<Role> selectRolesByUserId(Long userId);
+
+    List<Role> selectRolesALL();
 }

@@ -129,7 +129,9 @@ public class ManageUserController extends BaseManageControllet {
     @RequestMapping(value = "/findStudentList")
     @ResponseBody
     public JsonResult findStudentbyDsIdList(Integer pageNum) {
-        return manageServiceFacade.findStudentbyDsIdList(1L, pageNum);
+        ManageUser manageUser = getManageUser();
+
+        return manageServiceFacade.findStudentbyDsIdList(manageUser.getDsId(), pageNum);
     }
 
 }
