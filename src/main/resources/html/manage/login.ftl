@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<form action="/loginPost" method="post">
+<form action="/manage/loginPost" method="post">
     First name:<br>
     <input type="text" name="username" value="admin">
     <br>

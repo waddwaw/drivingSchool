@@ -51,7 +51,7 @@ public class ManageUserController extends BaseManageControllet {
         //// TODO: 16/12/13 返回login页面
         ManageUser m  = manageUserService.authentication("", "");
         map.put("test", "test");
-        return "/manage/index.ftl";
+        return "/manage/login.ftl";
     }
 
 //  username  password  host Ip地址
@@ -137,4 +137,11 @@ public class ManageUserController extends BaseManageControllet {
         return manageServiceFacade.findStudentbyDsIdList(manageUser.getDsId(), pageNum);
     }
 
+    @RequestMapping(value = "/findCoachList")
+    @ResponseBody
+    public JsonResult findCoachbyDsIdList(Integer pageNum) {
+        ManageUser manageUser = getManageUser();
+
+        return manageServiceFacade.findCoachbyDsIdList(manageUser.getDsId(), pageNum);
+    }
 }
