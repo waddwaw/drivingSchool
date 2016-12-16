@@ -10,4 +10,6 @@ public class ErrorDef {
 
 
     public final static int USER_PASS_ERROR = -1000;
+
+
 }

@@ -48,10 +48,10 @@ public class CoachStudentUserController extends BaseCsController{
             SecurityUtils.getSubject().getSession().setTimeout(1000 * 11);
             CoachStudentUser coachStudentUser = getCoachStudentUser();
             if (coachStudentUser.getDiscern() == CoachStudentUser.COACH ) {
-                return new JsonResult<Integer>(CoachStudentUser.COACH, "欢迎教练登录", ErrorDef.SUCCESS);
+                return new JsonResult<Integer>(ErrorDef.SUCCESS, "欢迎教练登录", CoachStudentUser.COACH);
             }
             if (coachStudentUser.getDiscern() == CoachStudentUser.STUDENT ) {
-                return new JsonResult<Integer>(CoachStudentUser.STUDENT, "欢迎学员登录", ErrorDef.SUCCESS);
+                return new JsonResult<Integer>(ErrorDef.SUCCESS, "欢迎学员登录", CoachStudentUser.STUDENT);
             }
 
         }catch (AuthenticationException e) {

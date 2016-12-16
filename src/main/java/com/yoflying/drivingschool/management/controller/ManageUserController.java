@@ -97,6 +97,8 @@ public class ManageUserController extends BaseManageControllet {
     @RequestMapping(value = "/createCoachSt", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult createCoachSt(@RequestBody CoachStudentUser coachStudentUser) {
+
+        coachStudentUser.setDsId(getManageUser().getDsId());
         int err = manageServiceFacade.createCoachSt(coachStudentUser);
         int discern = coachStudentUser.getDiscern();
         if (discern == 1) {
@@ -116,9 +118,18 @@ public class ManageUserController extends BaseManageControllet {
     @RequestMapping(value = "/createLeave", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult createLeave(@RequestBody DsLeave dsLeave) {
+
+        dsLeave.setDsId(getManageUser().getDsId());
+
         int err = manageServiceFacade.createLeave(dsLeave);
 
-        return new JsonResult<String>("创建驾校成功", err);
+        return new JsonResult<String>("教练请假成功", err);
+    }
+
+    @RequestMapping(value = "/findStudentList")
+    @ResponseBody
+    public JsonResult findStudentbyDsIdList(Integer pageNum) {
+        return manageServiceFacade.findStudentbyDsIdList(1L, pageNum);
     }
 
 }

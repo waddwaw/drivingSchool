@@ -1,8 +1,5 @@
 package com.yoflying.drivingschool.utils.json;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.Serializable;
 
 /**
@@ -10,7 +7,7 @@ import java.io.Serializable;
  * Created by arvin on 2016/12/14.
  */
 public class JsonResult <T> implements Serializable {
-    private final Logger logger = LoggerFactory.getLogger(JsonResult.class);
+;
     /**
      * 是否成功
      */
@@ -19,6 +16,14 @@ public class JsonResult <T> implements Serializable {
      * 信息
      */
     private String message;
+    /**
+     * 当前第几页
+     */
+    private int pageNum;
+    /**
+     * 总公几页
+     */
+    private long total;
     /**
      * 数据
      */
@@ -48,7 +53,7 @@ public class JsonResult <T> implements Serializable {
         this.status = status;
     }
 
-    public JsonResult(T data, String message, int status) {
+    public JsonResult(int status, String message, T data ) {
         this.data = data;
         this.message = message;
         this.status = status;
@@ -59,7 +64,31 @@ public class JsonResult <T> implements Serializable {
         this.status = status;
     }
 
+    public JsonResult(int status, String message, int pageNum, long total, T data) {
+        this.status = status;
+        this.message = message;
+        this.pageNum = pageNum;
+        this.total = total;
+        this.data = data;
+    }
+
     public JsonResult(int status) {
         this.status = status;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
     }
 }

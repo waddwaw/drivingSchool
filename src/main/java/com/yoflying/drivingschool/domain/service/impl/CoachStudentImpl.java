@@ -5,9 +5,11 @@ import com.yoflying.drivingschool.domain.dao.ManageUserMapper;
 import com.yoflying.drivingschool.domain.model.CoachStudentUser;
 import com.yoflying.drivingschool.domain.model.ManageUser;
 import com.yoflying.drivingschool.domain.service.CoachStudentService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by arvin on 2016/12/14.
@@ -19,10 +21,29 @@ public class CoachStudentImpl implements CoachStudentService{
     CoachStudentUserMapper coachStudentUserMapper;
 
     public CoachStudentUser authentication(String user, String pwd) {
-        return coachStudentUserMapper.findOneByManageAndStatusAvailable(user, pwd);
+        return coachStudentUserMapper.findOneByCoachStAndStatusAvailable(user, pwd);
     }
 
     public int insertCoachStudentUser(CoachStudentUser coachStudentUser) {
         return coachStudentUserMapper.insertCoachStudentUser(coachStudentUser);
     }
+
+    public int updateStudentBindCoach(Long dsId, Long studentsId, Long coachId) {
+        return coachStudentUserMapper.updateStudentBindCoach(dsId, studentsId, coachId);
+    }
+
+    public int updateCoachStudentUserStatus(Long dsId, Long coachIdStId, Integer status) {
+        return coachStudentUserMapper.updateCoachStudentUserStatus(dsId, coachIdStId, status);
+    }
+
+    //根据驾校id 查找所有学生信息
+    public List<CoachStudentUser> findStByDsIdList(Long dsId) {
+        return coachStudentUserMapper.findStByDsIdList(dsId);
+    }
+
+    //根据驾校id 查找所有教练信息
+    public List<CoachStudentUser> findCoachByDsIdList(Long dsId) {
+        return coachStudentUserMapper.findCoachByDsIdList(dsId);
+    }
+
 }

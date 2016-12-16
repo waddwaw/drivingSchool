@@ -94,5 +94,6 @@
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-web:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-quartz:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: org.opensymphony.quartz:quartz:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.22" level="project" />
   </component>
 </module>

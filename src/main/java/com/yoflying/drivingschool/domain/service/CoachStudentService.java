@@ -2,6 +2,9 @@ package com.yoflying.drivingschool.domain.service;
 
 import com.yoflying.drivingschool.domain.model.CoachStudentUser;
 import com.yoflying.drivingschool.domain.model.ManageUser;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * Created by arvin on 2016/12/14.
@@ -17,4 +20,12 @@ public interface CoachStudentService {
     CoachStudentUser authentication (String user, String pwd);
 
     int insertCoachStudentUser(CoachStudentUser coachStudentUser);
+
+    int updateStudentBindCoach(Long dsId, Long studentsId, Long coachId);
+
+    int updateCoachStudentUserStatus(Long dsId, Long coachIdStId, Integer status);
+
+    List<CoachStudentUser> findStByDsIdList(Long dsId);
+
+    List<CoachStudentUser> findCoachByDsIdList(Long dsId);
 }
