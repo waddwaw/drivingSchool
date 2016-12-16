@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.yoflying.drivingschool.domain.model.CoachStudentUser;
 import com.yoflying.drivingschool.domain.model.DrivingSchool;
 import com.yoflying.drivingschool.domain.model.DsLeave;
+import com.yoflying.drivingschool.infrastructure.realm.RoleSign;
 import com.yoflying.drivingschool.management.BaseManageControllet;
 import com.yoflying.drivingschool.constdef.ErrorDef;
 import com.yoflying.drivingschool.domain.model.ManageUser;
@@ -14,6 +15,7 @@ import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,6 +78,7 @@ public class ManageUserController extends BaseManageControllet {
     }
 
     @RequestMapping(value = "/index")
+    @RequiresRoles(RoleSign.ADMIN)
     public String index (ModelMap map) {
 
          //分页demo 目前已经集成

@@ -37,7 +37,7 @@ public class CoachStudentInterceptor extends HandlerInterceptorAdapter {
             requiresRoles = handlerMethod.getMethod().getAnnotation(RequiresRoles.class);
         }
         //对需要权限认证的接口进行拦截操作
-        if (!Objects.isNull(requiresPermissions) && !Objects.isNull(requiresRoles)) {
+        if (!Objects.isNull(requiresPermissions) || !Objects.isNull(requiresRoles)) {
 
             Subject subject = SecurityUtils.getSubject();
             CoachStudentUser coachStudent = (CoachStudentUser) subject.getPrincipal();
