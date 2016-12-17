@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 /**
  * Created by liqiang on 16/12/15.
  */
-public class AppointmentSt {
+public class AppointmentSt extends BaseModel{
     private Long id;
     private Long dsId;
     private Long coachId;

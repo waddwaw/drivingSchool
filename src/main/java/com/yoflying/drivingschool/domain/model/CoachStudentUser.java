@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * Created by arvin on 2016/12/14.
  */
-public class CoachStudentUser {
+public class CoachStudentUser extends BaseModel {
     public final static int COACH = 1;
     public final static int STUDENT = 2;
 

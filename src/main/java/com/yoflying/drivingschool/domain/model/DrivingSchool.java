@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * Created by liqiang on 16/12/14.
  */
-public class DrivingSchool {
+public class DrivingSchool extends BaseModel {
 
     private Integer id;
     private String dsName;

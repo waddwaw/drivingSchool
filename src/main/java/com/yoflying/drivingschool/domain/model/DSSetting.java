@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 /**
  * Created by liqiang on 16/12/14.
  */
-public class DSSetting {
+public class DSSetting extends BaseModel {
     private Long id;
     private Long dsId;
     private String dsAppointment2;

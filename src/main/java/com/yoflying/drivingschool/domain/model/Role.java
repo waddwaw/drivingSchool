@@ -6,7 +6,7 @@ package com.yoflying.drivingschool.domain.model;
  * @author StarZou
  * @since 2014年7月17日 下午1:02:25
  **/
-public class Role {
+public class Role extends BaseModel {
     private Long id;
 
     private String role_name;

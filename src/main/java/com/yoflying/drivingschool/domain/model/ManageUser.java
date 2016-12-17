@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  * Created by liqiang on 16/12/13.
  */
 
-public class ManageUser {
+public class ManageUser extends BaseModel {
 
     private Long id;
     private String username;

@@ -6,7 +6,7 @@ package com.yoflying.drivingschool.domain.model;
  * @author StarZou
  * @since 2014年7月17日 下午1:02:55
  **/
-public class Permission {
+public class Permission extends BaseModel {
     private Long id;
 
     private String permission_name;

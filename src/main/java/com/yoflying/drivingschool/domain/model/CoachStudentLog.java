@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * Created by liqiang on 16/12/15.
  */
-public class CoachStudentLog {
+public class CoachStudentLog extends BaseModel{
     private Long id;
     private Long dsId;
     private Long coachId;

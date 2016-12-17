@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 /**
  * Created by liqiang on 16/12/14.
  */
-public class DsLeave {
+public class DsLeave extends BaseModel {
     private Long id;
     private Long dsId;
     private Long coachId;
