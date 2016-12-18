@@ -17,7 +17,7 @@ public interface AppointmentStMapper {
             " VALUES( #{dsId},#{coachId},#{testCourse},#{testAddress},#{studentsIds},#{appointmentDate},#{status},NOW())")
     int insertAppointmentSt(AppointmentSt appointmentSt);
 
-    @Update("UPDATE INTO appointment_st SET status = #{status},studentsIds = #{studentsIds}"+
+    @Update("UPDATE appointment_st SET status = #{status},studentsIds = #{studentsIds}"+
             ",modifyTime = NOW() " +
             "WHERE dsId = #{dsId} and coachId = #{coachId}")
     int updateAppointmentSt(@Param("status") Integer status, @Param("coachId") Long coachId, @Param("dsId") Long dsId, @Param("studentsIds") String studentsIds);

@@ -20,7 +20,7 @@ public interface DsLeaveMapper {
             " VALUES( #{dsId},#{coachId},#{leaveDate2},#{leaveDate3},#{status},NOW())")
     int insertDsLeave(DsLeave dsLeave);
 
-    @Update("UPDATE INTO ds_Leave SET status = #{status}"+
+    @Update("UPDATE ds_Leave SET status = #{status}"+
             ",modifyTime = NOW() " +
             "WHERE dsId = #{dsId} and coachId = #{coachId}")
     int updateDsLeave(@Param("status") Integer status, @Param("coachId") Long coachId, @Param("dsId") Long dsId);

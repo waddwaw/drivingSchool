@@ -18,7 +18,7 @@ public interface DSSettingMapper {
             " VALUES(#{dsId},#{dsAppointment2},#{dsAppointment3},#{outCoachIds},#{status},NOW())")
     int insertDssetting(DSSetting dsSetting);
 
-    @Update("UPDATE INTO ds_setting SET  dsAppointment2 = #{dsAppointment2}," +
+    @Update("UPDATE ds_setting SET  dsAppointment2 = #{dsAppointment2}," +
             " dsAppointment3 = #{dsAppointment3}, outCoachIds = #{outCoachIds}, " +
             "status = #{status}, modifyTime = NOW() " +
             "WHERE dsId = #{dsId}")
