@@ -41,12 +41,14 @@ public interface CoachStudentUserMapper {
     @Update("UPDATE INTO coach_students SET coachId = #{coachId},course = #{course}"+
             ",modifyTime = NOW() " +
             "WHERE dsId = #{dsId} and id = #{studentsId}")
-    int updateStudentBindCoach(@Param("dsId") Long dsId, @Param("studentsId") Long studentsId, @Param("coachId") Long coachId, @Param("course") int course);
+    int updateStudentBindCoach(@Param("dsId") Long dsId, @Param("studentsId") Long studentsId,
+                               @Param("coachId") Long coachId, @Param("course") int course);
 
     @Update("UPDATE INTO coach_students SET status = #{status},course = #{course}"+
             ",modifyTime = NOW() " +
             "WHERE dsId = #{dsId} and id = #{coachIdStId}")
-    int updateCoachStudentUserStatus(@Param("dsId") Long dsId, @Param("coachIdStId") Long coachIdStId, @Param("status") Integer status, @Param("course") int course);
+    int updateCoachStudentUserStatus(@Param("dsId") Long dsId, @Param("coachIdStId") Long coachIdStId,
+                                     @Param("status") Integer status, @Param("course") int course);
 
 
 }

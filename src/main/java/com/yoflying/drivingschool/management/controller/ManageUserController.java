@@ -9,6 +9,7 @@ import com.yoflying.drivingschool.management.BaseManageControllet;
 import com.yoflying.drivingschool.constdef.ErrorDef;
 import com.yoflying.drivingschool.domain.service.ManageUserService;
 import com.yoflying.drivingschool.management.facade.ManageServiceFacade;
+import com.yoflying.drivingschool.management.model.CoachStatusCouresModel;
 import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -22,11 +23,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -110,7 +113,7 @@ public class ManageUserController extends BaseManageControllet {
     @ResponseBody
     public JsonResult createManage(@RequestBody ManageUser manageUser) {
         int err = manageServiceFacade.createManage(manageUser);
-        return new JsonResult<String>("创建管理员成功", err);
+        return new JsonResult<String>("", err);
     }
 
     /**
@@ -126,9 +129,9 @@ public class ManageUserController extends BaseManageControllet {
         int err = manageServiceFacade.createCoachSt(coachStudentUser);
         int discern = coachStudentUser.getDiscern();
         if (discern == 1) {
-            return new JsonResult<String>("创建教练成功", err);
+            return new JsonResult<String>("", err);
         }
-        return new JsonResult<String>("创建学员成功", err);
+        return new JsonResult<String>("", err);
     }
 
     /**
@@ -141,7 +144,7 @@ public class ManageUserController extends BaseManageControllet {
     public JsonResult createDrivingSchool(@RequestBody DrivingSchool drivingSchool) {
         int err = manageServiceFacade.createDrivingSchool(drivingSchool);
 
-        return new JsonResult<String>("创建驾校成功", err);
+        return new JsonResult<String>("", err);
     }
 
 
@@ -158,7 +161,7 @@ public class ManageUserController extends BaseManageControllet {
 
         int err = manageServiceFacade.createLeave(dsLeave);
 
-        return new JsonResult<String>("教练请假成功", err);
+        return new JsonResult<String>("", err);
     }
 
     /**
@@ -172,6 +175,22 @@ public class ManageUserController extends BaseManageControllet {
         ManageUser manageUser = getManageUser();
 
         return manageServiceFacade.findStudentbyDsIdList(manageUser.getDsId(), pageNum);
+    }
+
+    /**
+     * discern 为1 对该驾校教练进行模糊搜索 为2 对学员进行模糊搜索
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/searchCoachStList")
+    @ResponseBody
+    public JsonResult searchCoachStList(Integer discern, String name) {
+
+        if ( !(discern <= 2) || !(discern > 0) ||StringUtils.isEmpty(name)) {
+            return new JsonResult("参数传递错误", ErrorDef.SUCCESS);
+        }
+
+        return manageServiceFacade.searchCoachStList(getManageUser().getDsId(), name, discern);
     }
 
     /**
@@ -192,14 +211,32 @@ public class ManageUserController extends BaseManageControllet {
      * @param dsSetting
      * @return
      */
-    @RequestMapping(value = "/settingDrivingconfig", method = RequestMethod.POST)
+    @RequestMapping(value = "/settingDrivingConfig", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult settingDrivingconfig(@RequestBody DSSetting dsSetting) {
+    public JsonResult settingDrivingConfig(@RequestBody DSSetting dsSetting) {
 
         dsSetting.setDsId(getManageUser().getDsId());
 
         int err = manageServiceFacade.settingDrivingconfig(dsSetting);
 
-        return new JsonResult("更改配置成功", err);
+        return new JsonResult("", err);
+    }
+
+
+    /**
+     *更改学员绑定教练 or 更改学员当前科目
+     * @return
+     */
+    @RequestMapping(value = "/bindCSCUpdate", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult bindCoachorStatusCourseUpdate(@RequestBody @Valid CoachStatusCouresModel cscModel, BindingResult result) {
+
+        if(result.hasErrors()) {
+            return getErrors(result);
+        }
+
+        int err = manageServiceFacade.bindCoachorStatusCourseUpdate(getManageUser().getDsId(), cscModel);
+
+        return new JsonResult("", err);
     }
 }

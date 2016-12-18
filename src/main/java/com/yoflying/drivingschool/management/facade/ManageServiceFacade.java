@@ -6,6 +6,7 @@ import com.yoflying.drivingschool.constdef.Const;
 import com.yoflying.drivingschool.constdef.ErrorDef;
 import com.yoflying.drivingschool.domain.model.*;
 import com.yoflying.drivingschool.domain.service.*;
+import com.yoflying.drivingschool.management.model.CoachStatusCouresModel;
 import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,30 +40,31 @@ public class ManageServiceFacade {
 
     public int createManage(ManageUser manageUser) {
 
-        manageUserService.insertManage(manageUser);
+        int err = manageUserService.insertManage(manageUser);
 
-        return ErrorDef.SUCCESS;
+        return err > 0 ? ErrorDef.SUCCESS : ErrorDef.FAILURE;
     }
 
     public int createCoachSt(CoachStudentUser coachStudentUser) {
 
-        coachStudentService.insertCoachStudentUser(coachStudentUser);
+       int err = coachStudentService.insertCoachStudentUser(coachStudentUser);
 
-        return ErrorDef.SUCCESS;
+
+        return err > 0 ? ErrorDef.SUCCESS : ErrorDef.FAILURE;
     }
 
     public int createDrivingSchool(DrivingSchool drivingSchool) {
 
-        drivingSchoolService.insertByDrivingSchool(drivingSchool);
+        int err = drivingSchoolService.insertByDrivingSchool(drivingSchool);
 
-        return ErrorDef.SUCCESS;
+        return err > 0 ? ErrorDef.SUCCESS : ErrorDef.FAILURE;
     }
 
     public int createLeave(DsLeave dsLeave) {
 
-        dsLeaveService.insertDsLeave(dsLeave);
+        int err = dsLeaveService.insertDsLeave(dsLeave);
 
-        return ErrorDef.SUCCESS;
+        return err > 0 ? ErrorDef.SUCCESS : ErrorDef.FAILURE;
     }
 
     public JsonResult<List<CoachStudentUser>> findStudentbyDsIdList(Long dsId, int pageNum) {
@@ -88,5 +90,26 @@ public class ManageServiceFacade {
         dsSettingService.updateDssetting(dsSetting);
 
         return ErrorDef.SUCCESS;
+    }
+
+    public JsonResult searchCoachStList(Long dsId, String name, int discern) {
+
+        List<CoachStudentUser> coachStudentUsers = null;
+
+        if (discern == CoachStudentUser.COACH) {
+            coachStudentUsers = coachStudentService.findCoachByDsIdAndNameList(dsId, name);
+        }else if (discern == CoachStudentUser.STUDENT) {
+            coachStudentUsers = coachStudentService.findStByDsIdAndNameList(dsId, name);
+        }
+
+        return new JsonResult<List<CoachStudentUser>>(ErrorDef.SUCCESS, "返回查询结果", coachStudentUsers);
+    }
+
+    public int bindCoachorStatusCourseUpdate(long dsId, CoachStatusCouresModel coachStatusCouresModel) {
+
+        int err = coachStudentService.updateStudentBindCoach(dsId, coachStatusCouresModel.getStudentsId(),
+                coachStatusCouresModel.getCoachId(), coachStatusCouresModel.getCourse());
+
+        return err > 0 ? ErrorDef.SUCCESS : ErrorDef.FAILURE;
     }
 }
