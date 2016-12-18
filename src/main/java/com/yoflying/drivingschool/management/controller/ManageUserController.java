@@ -2,19 +2,18 @@ package com.yoflying.drivingschool.management.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.yoflying.drivingschool.domain.model.CoachStudentUser;
-import com.yoflying.drivingschool.domain.model.DrivingSchool;
-import com.yoflying.drivingschool.domain.model.DsLeave;
+import com.yoflying.drivingschool.domain.model.*;
+import com.yoflying.drivingschool.infrastructure.realm.PermissionSign;
 import com.yoflying.drivingschool.infrastructure.realm.RoleSign;
 import com.yoflying.drivingschool.management.BaseManageControllet;
 import com.yoflying.drivingschool.constdef.ErrorDef;
-import com.yoflying.drivingschool.domain.model.ManageUser;
 import com.yoflying.drivingschool.domain.service.ManageUserService;
 import com.yoflying.drivingschool.management.facade.ManageServiceFacade;
 import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -45,6 +44,12 @@ public class ManageUserController extends BaseManageControllet {
     @Autowired
     ManageServiceFacade manageServiceFacade;
 
+
+    /**
+     * 管理员页面登录页面
+     * @param map
+     * @return
+     */
     @RequestMapping("/login")
     public String login (ModelMap map) {
 
@@ -55,9 +60,15 @@ public class ManageUserController extends BaseManageControllet {
     }
 
 //  username  password  host Ip地址
+
+    /**
+     * 管理员用户登录 post 请求 可以携带IP地址
+     * @param token
+     * @return
+     */
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult<String> loginPost (UsernamePasswordToken token) {
+    public JsonResult<String> loginPost (@RequestBody UsernamePasswordToken token) {
         logger.info("manage" + token.getUsername() + "---------" + token.getHost());
 
         if (StringUtils.isEmpty(token.getUsername()) || StringUtils.isEmpty(token.getUsername())) {
@@ -90,6 +101,11 @@ public class ManageUserController extends BaseManageControllet {
         return "/manage/index.ftl";
     }
 
+    /**
+     * 超级管理员创建驾校管理员
+     * @param manageUser
+     * @return
+     */
     @RequestMapping(value = "/createManage", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult createManage(@RequestBody ManageUser manageUser) {
@@ -97,6 +113,11 @@ public class ManageUserController extends BaseManageControllet {
         return new JsonResult<String>("创建管理员成功", err);
     }
 
+    /**
+     * 创建教练or 学员
+     * @param coachStudentUser
+     * @return
+     */
     @RequestMapping(value = "/createCoachSt", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult createCoachSt(@RequestBody CoachStudentUser coachStudentUser) {
@@ -110,6 +131,11 @@ public class ManageUserController extends BaseManageControllet {
         return new JsonResult<String>("创建学员成功", err);
     }
 
+    /**
+     * 超级管理员创建驾校
+     * @param drivingSchool
+     * @return
+     */
     @RequestMapping(value = "/createDrivingSchool", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult createDrivingSchool(@RequestBody DrivingSchool drivingSchool) {
@@ -118,6 +144,12 @@ public class ManageUserController extends BaseManageControllet {
         return new JsonResult<String>("创建驾校成功", err);
     }
 
+
+    /**
+     * 教练请假申请
+     * @param dsLeave
+     * @return
+     */
     @RequestMapping(value = "/createLeave", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult createLeave(@RequestBody DsLeave dsLeave) {
@@ -129,6 +161,11 @@ public class ManageUserController extends BaseManageControllet {
         return new JsonResult<String>("教练请假成功", err);
     }
 
+    /**
+     * 根据驾校id 查找驾校所有学生
+     * @param pageNum
+     * @return
+     */
     @RequestMapping(value = "/findStudentList")
     @ResponseBody
     public JsonResult findStudentbyDsIdList(Integer pageNum) {
@@ -137,11 +174,32 @@ public class ManageUserController extends BaseManageControllet {
         return manageServiceFacade.findStudentbyDsIdList(manageUser.getDsId(), pageNum);
     }
 
+    /**
+     * 根据驾校id 查找驾校所有教练
+     * @param pageNum
+     * @return
+     */
     @RequestMapping(value = "/findCoachList")
     @ResponseBody
     public JsonResult findCoachbyDsIdList(Integer pageNum) {
         ManageUser manageUser = getManageUser();
 
         return manageServiceFacade.findCoachbyDsIdList(manageUser.getDsId(), pageNum);
+    }
+
+    /**
+     * 管理员更改驾校配置设置
+     * @param dsSetting
+     * @return
+     */
+    @RequestMapping(value = "/settingDrivingconfig", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult settingDrivingconfig(@RequestBody DSSetting dsSetting) {
+
+        dsSetting.setDsId(getManageUser().getDsId());
+
+        int err = manageServiceFacade.settingDrivingconfig(dsSetting);
+
+        return new JsonResult("更改配置成功", err);
     }
 }

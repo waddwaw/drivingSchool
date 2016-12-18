@@ -46,4 +46,14 @@ public class CoachStudentImpl implements CoachStudentService{
         return coachStudentUserMapper.findCoachByDsIdList(dsId);
     }
 
+    //根据驾校id 模糊搜索教练信息
+    public List<CoachStudentUser> findCoachByDsIdAndNameList(Long dsId, String name) {
+        return coachStudentUserMapper.findCoachByDsIdAndNameList(dsId, name);
+    }
+
+    //根据驾校id 模糊搜索学生信息
+    public List<CoachStudentUser> findStByDsIdAndNameList(Long dsId, String name) {
+        return coachStudentUserMapper.findStByDsIdAndNameList(dsId, name);
+    }
+
 }

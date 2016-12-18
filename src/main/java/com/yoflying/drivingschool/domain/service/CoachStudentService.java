@@ -28,4 +28,8 @@ public interface CoachStudentService {
     List<CoachStudentUser> findStByDsIdList(Long dsId);
 
     List<CoachStudentUser> findCoachByDsIdList(Long dsId);
+
+    List<CoachStudentUser> findCoachByDsIdAndNameList(Long dsId, String name);
+
+    List<CoachStudentUser> findStByDsIdAndNameList(Long dsId, String name);
 }

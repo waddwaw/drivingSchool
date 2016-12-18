@@ -24,6 +24,14 @@ public interface CoachStudentUserMapper {
     @Select("SELECT * FROM coach_students WHERE dsId = #{dsId} and discern = 1 and status = 1 ORDER BY createTime DESC")
     List<CoachStudentUser> findCoachByDsIdList(@Param("dsId") Long dsId);
 
+    @Select("SELECT * FROM coach_students WHERE dsId = #{dsId} and discern = 1 and status = 1 " +
+            "and name LIKE concat('%',#{name},'%') ORDER BY createTime DESC")
+    List<CoachStudentUser> findCoachByDsIdAndNameList(@Param("dsId") Long dsId, @Param("name") String name);
+
+    @Select("SELECT * FROM coach_students WHERE dsId = #{dsId} and discern = 2 and status = 1 " +
+            "and name LIKE concat('%',#{name},'%') ORDER BY createTime DESC")
+    List<CoachStudentUser> findStByDsIdAndNameList(@Param("dsId") Long dsId, @Param("name") String name);
+
     @Insert("INSERT INTO coach_students (username, password,dsId,name,sex,identityCard,discern,phone,wechat,address" +
             "course,coachId,status,modifyTime)" +
             " VALUES(#{username},#{password},#{dsId},#{name},#{sex},#{identityCard},#{discern},#{phone},#{wechat},#{address}" +
@@ -39,4 +47,6 @@ public interface CoachStudentUserMapper {
             ",modifyTime = NOW() " +
             "WHERE dsId = #{dsId} and id = #{coachIdStId}")
     int updateCoachStudentUserStatus(@Param("dsId") Long dsId, @Param("coachIdStId") Long coachIdStId, @Param("status") Integer status, @Param("course") int course);
+
+
 }

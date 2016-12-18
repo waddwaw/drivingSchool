@@ -15,6 +15,6 @@ public class CoachController extends BaseCsController {
     @RequestMapping("/index")
     public String index(ModelMap map) {
 
-        return "coach.ftl";
+        return "/coachSt/coach.ftl";
     }
 }

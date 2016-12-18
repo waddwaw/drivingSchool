@@ -4,14 +4,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.yoflying.drivingschool.constdef.Const;
 import com.yoflying.drivingschool.constdef.ErrorDef;
-import com.yoflying.drivingschool.domain.model.CoachStudentUser;
-import com.yoflying.drivingschool.domain.model.DrivingSchool;
-import com.yoflying.drivingschool.domain.model.DsLeave;
-import com.yoflying.drivingschool.domain.model.ManageUser;
-import com.yoflying.drivingschool.domain.service.CoachStudentService;
-import com.yoflying.drivingschool.domain.service.DrivingSchoolService;
-import com.yoflying.drivingschool.domain.service.DsLeaveService;
-import com.yoflying.drivingschool.domain.service.ManageUserService;
+import com.yoflying.drivingschool.domain.model.*;
+import com.yoflying.drivingschool.domain.service.*;
 import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +33,9 @@ public class ManageServiceFacade {
 
     @Autowired
     DsLeaveService dsLeaveService;
+
+    @Autowired
+    DSSettingService dsSettingService;
 
     public int createManage(ManageUser manageUser) {
 
@@ -84,5 +81,12 @@ public class ManageServiceFacade {
         long total  = ((Page) studentUsers).getTotal();
 
         return new JsonResult<List<CoachStudentUser>>(ErrorDef.SUCCESS, "查询成功", pageNum, total, studentUsers);
+    }
+
+    public int settingDrivingconfig(DSSetting dsSetting) {
+
+        dsSettingService.updateDssetting(dsSetting);
+
+        return ErrorDef.SUCCESS;
     }
 }
