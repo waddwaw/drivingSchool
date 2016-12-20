@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Created by arvin on 2016/12/14.
  */
 public class JsonResult <T> implements Serializable {
-;
+    
     /**
      * 是否成功
      */
