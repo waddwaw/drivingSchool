@@ -23,6 +23,10 @@ public class ManageUserImpl implements ManageUserService{
         return manageUserMapper.findOneByManageAndStatusAvailable(user, pwd);
     }
 
+    public ManageUser findOneByManageId(long id) {
+        return manageUserMapper.findOneByManageId(id);
+    }
+
     public int insertManage(ManageUser manageUser) {
         return manageUserMapper.insertManage(manageUser);
     }

@@ -17,6 +17,9 @@ public interface ManageUserMapper {
     @Select("SELECT * FROM management WHERE username = #{user} and password = #{pwd} and status = 1")
     ManageUser findOneByManageAndStatusAvailable(@Param("user") String user, @Param("pwd") String pwd);
 
+    @Select("SELECT * FROM management WHERE id = #{id} and status = 1")
+    ManageUser findOneByManageId(@Param("id") long id);
+
     @Insert("INSERT INTO management (username, password,dsId,identityCard,dsPhone,status,modifyTime)" +
             " VALUES(#{username},#{password},#{dsId},#{identityCard},#{dsPhone},#{status},NOW())")
     int insertManage(ManageUser manageUser);

@@ -2,30 +2,37 @@ package com.yoflying.drivingschool.infrastructure.token;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 
+import java.io.Serializable;
+
 /**
- * Created by arvin on 2016/12/14.
+ * Created by arvin on 2016/12/21.
  */
-public class RestAccessToken extends UsernamePasswordToken {
+public class RestAccessToken extends UsernamePasswordToken implements Serializable {
+    private Long userId;
+    private int category;
+    private String tokenCode;
 
-    private String accessToken;
-
-
-    public RestAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public Long getUserId() {
+        return userId;
     }
 
-
-    @Override
-    public Object getCredentials() {
-        return getAccessToken();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public int getCategory() {
+        return category;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setCategory(int category) {
+        this.category = category;
     }
 
+    public String getTokenCode() {
+        return tokenCode;
+    }
+
+    public void setTokenCode(String tokenCode) {
+        this.tokenCode = tokenCode;
+    }
 }

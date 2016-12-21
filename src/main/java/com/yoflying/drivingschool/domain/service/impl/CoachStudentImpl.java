@@ -24,6 +24,10 @@ public class CoachStudentImpl implements CoachStudentService{
         return coachStudentUserMapper.findOneByCoachStAndStatusAvailable(user, pwd);
     }
 
+    public CoachStudentUser findOneByCoachStID(long id) {
+        return coachStudentUserMapper.findOneByCoachStID(id);
+    }
+
     public int insertCoachStudentUser(CoachStudentUser coachStudentUser) {
         return coachStudentUserMapper.insertCoachStudentUser(coachStudentUser);
     }

@@ -3,7 +3,7 @@ package com.yoflying.drivingschool.coachStudents.controller;
 import com.yoflying.drivingschool.coachStudents.BaseCsController;
 import com.yoflying.drivingschool.constdef.ErrorDef;
 import com.yoflying.drivingschool.domain.model.CoachStudentUser;
-import com.yoflying.drivingschool.infrastructure.token.RestAccessToken;
+import com.yoflying.drivingschool.infrastructure.token.ManageToken;
 import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -35,7 +35,7 @@ public class CoachStudentUserController extends BaseCsController{
     //  username  password  host Ip地址
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult<Integer> loginPost (@RequestBody RestAccessToken token) {
+    public JsonResult<Integer> loginPost (@RequestBody ManageToken token) {
         logger.info("coachstudent" + token.getUsername() + "---------" + token.getHost());
 
         if (StringUtils.isEmpty(token.getUsername()) || StringUtils.isEmpty(token.getUsername())) {

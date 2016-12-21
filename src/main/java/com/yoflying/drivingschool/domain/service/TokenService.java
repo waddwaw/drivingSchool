@@ -9,5 +9,5 @@ public interface TokenService {
 
     int insertToken(Token token);
 
-    Token findTokenBycategoryAndCode(int category, String tokenCode);
+    Token findTokenBycategoryAndCode(String category, String tokenCode);
 }

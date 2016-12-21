@@ -19,6 +19,8 @@ public interface CoachStudentService {
      */
     CoachStudentUser authentication (String user, String pwd);
 
+    CoachStudentUser findOneByCoachStID(long id);
+
     int insertCoachStudentUser(CoachStudentUser coachStudentUser);
 
     int updateStudentBindCoach(Long dsId, Long studentsId, Long coachId, Integer course);

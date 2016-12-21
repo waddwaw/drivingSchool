@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * Created by arvin on 2016/12/21.
  */
-public class Token {
+public class Token extends BaseModel{
     private Long id;
     private Long userId;
     private int category;

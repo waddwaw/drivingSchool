@@ -5,6 +5,7 @@ import com.yoflying.drivingschool.domain.service.CoachStudentService;
 import com.yoflying.drivingschool.domain.service.ManageUserService;
 import com.yoflying.drivingschool.domain.service.PermissionService;
 import com.yoflying.drivingschool.domain.service.RoleService;
+import com.yoflying.drivingschool.infrastructure.token.ManageToken;
 import com.yoflying.drivingschool.infrastructure.token.RestAccessToken;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -85,6 +86,41 @@ public class SecurityRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
+        //APP Restful
+        if (token instanceof RestAccessToken) {
+           RestAccessToken restAccessToken =  ((RestAccessToken) token);
+            if (restAccessToken.getCategory() == 1) {
+                ManageUser manageUser = manageUserService.findOneByManageId(restAccessToken.getUserId());
+                if (Objects.isNull(manageUser)){
+                    return null;
+                }else {
+                    return new SimpleAuthenticationInfo(manageUser, manageUser.getPassword(), this.getName());
+                }
+            }
+            if (restAccessToken.getCategory() == 2) {
+                CoachStudentUser coachStudentUser = coachStudentService.findOneByCoachStID(restAccessToken.getUserId());
+                if (Objects.isNull(coachStudentUser)){
+                    return null;
+                }else {
+                    return new SimpleAuthenticationInfo(coachStudentUser, coachStudentUser.getPassword(), this.getName());
+                }
+            }
+        }
+
+        //学员or教练
+        if (token instanceof ManageToken) {
+            ManageToken restAccessToken = (ManageToken) token;
+            String password = new String(((UsernamePasswordToken) token).getPassword());
+             CoachStudentUser coachStudent = coachStudentService.authentication(restAccessToken.getUsername(),
+                     password);
+
+            if (Objects.isNull(coachStudent)) {
+                return null;
+            } else {
+                return new SimpleAuthenticationInfo(coachStudent, coachStudent.getPassword(), this.getName());
+            }
+        }
+
         //管理平台登录
         if (token instanceof UsernamePasswordToken) {
             UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
@@ -96,18 +132,6 @@ public class SecurityRealm extends AuthorizingRealm {
                 return null;
             } else {
                 return new SimpleAuthenticationInfo(manageUser, manageUser.getPassword(), this.getName());
-            }
-        }
-        if (token instanceof RestAccessToken) {
-            RestAccessToken restAccessToken = (RestAccessToken) token;
-            String password = new String(((UsernamePasswordToken) token).getPassword());
-             CoachStudentUser coachStudent = coachStudentService.authentication(restAccessToken.getUsername(),
-                     password);
-
-            if (Objects.isNull(coachStudent)) {
-                return null;
-            } else {
-                return new SimpleAuthenticationInfo(coachStudent, coachStudent.getPassword(), this.getName());
             }
         }
 

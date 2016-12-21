@@ -1,6 +1,7 @@
 package com.yoflying.drivingschool.domain.service;
 
 import com.yoflying.drivingschool.domain.model.ManageUser;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 管理员 业务接口
@@ -16,6 +17,8 @@ public interface ManageUserService {
      * @return
      */
     ManageUser authentication (String user, String pwd);
+
+    ManageUser findOneByManageId(long id);
 
     int insertManage(ManageUser manageUser);
 }
