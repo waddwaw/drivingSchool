@@ -74,14 +74,12 @@
     <!--<mvc:resources mapping="/management/**" location="/management/"/>-->
 
     <mvc:interceptors>
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**" />-->
-            <!--<mvc:exclude-mapping path="/contents/**"/>-->
-            <!--<mvc:exclude-mapping path="/management/**"/>-->
-            <!--<mvc:exclude-mapping path="/manage/**"/>-->
-            <!--<mvc:exclude-mapping path="/*/wechat/**"/>-->
-            <!--<ref bean="authInterceptor" />-->
-        <!--</mvc:interceptor>-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/manage/**"/>
+            <mvc:exclude-mapping path="/coachstudent/**"/>
+            <ref bean="authInterceptor" />
+        </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/coachstudent/**" />
             <ref bean="coachStudentInterceptor" />
