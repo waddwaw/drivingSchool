@@ -71,7 +71,7 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult<String> loginPost (@RequestBody UsernamePasswordToken token) {
+    public JsonResult<String> loginPost (UsernamePasswordToken token) {
         logger.info("manage" + token.getUsername() + "---------" + token.getHost());
 
         if (StringUtils.isEmpty(token.getUsername()) || StringUtils.isEmpty(token.getUsername())) {

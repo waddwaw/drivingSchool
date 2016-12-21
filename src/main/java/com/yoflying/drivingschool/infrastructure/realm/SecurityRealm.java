@@ -94,7 +94,7 @@ public class SecurityRealm extends AuthorizingRealm {
                 if (Objects.isNull(manageUser)){
                     return null;
                 }else {
-                    return new SimpleAuthenticationInfo(manageUser, manageUser.getPassword(), this.getName());
+                    return new SimpleAuthenticationInfo(manageUser, restAccessToken.getTokenCode(), this.getName());
                 }
             }
             if (restAccessToken.getCategory() == 2) {
@@ -102,7 +102,7 @@ public class SecurityRealm extends AuthorizingRealm {
                 if (Objects.isNull(coachStudentUser)){
                     return null;
                 }else {
-                    return new SimpleAuthenticationInfo(coachStudentUser, coachStudentUser.getPassword(), this.getName());
+                    return new SimpleAuthenticationInfo(coachStudentUser, restAccessToken.getTokenCode(), this.getName());
                 }
             }
         }

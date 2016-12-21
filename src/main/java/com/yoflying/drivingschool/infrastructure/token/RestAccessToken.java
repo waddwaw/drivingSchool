@@ -7,10 +7,15 @@ import java.io.Serializable;
 /**
  * Created by arvin on 2016/12/21.
  */
-public class RestAccessToken extends UsernamePasswordToken implements Serializable {
+public class RestAccessToken extends UsernamePasswordToken {
     private Long userId;
     private int category;
     private String tokenCode;
+
+    @Override
+    public Object getCredentials() {
+        return getTokenCode();
+    }
 
     public Long getUserId() {
         return userId;

@@ -7,6 +7,6 @@ import java.io.Serializable;
 /**
  * Created by arvin on 2016/12/14.
  */
-public class ManageToken extends UsernamePasswordToken implements Serializable {
+public class ManageToken extends UsernamePasswordToken{
 
 }

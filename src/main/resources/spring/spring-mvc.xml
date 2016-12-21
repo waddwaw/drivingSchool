@@ -76,8 +76,8 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**" />
-            <mvc:exclude-mapping path="/manage/**"/>
-            <mvc:exclude-mapping path="/coachstudent/**"/>
+            <!--<mvc:exclude-mapping path="/manage/**"/>-->
+            <!--<mvc:exclude-mapping path="/coachstudent/**"/>-->
             <ref bean="authInterceptor" />
         </mvc:interceptor>
         <mvc:interceptor>

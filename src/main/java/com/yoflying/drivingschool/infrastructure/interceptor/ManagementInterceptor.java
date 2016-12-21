@@ -41,8 +41,14 @@ public class ManagementInterceptor extends HandlerInterceptorAdapter {
         //对需要权限认证的接口进行拦截操作
         if (!Objects.isNull(requiresPermissions) || !Objects.isNull(requiresRoles)) {
 
+            ManageUser manageUser = null;
             Subject subject = SecurityUtils.getSubject();
-            ManageUser manageUser = (ManageUser) subject.getPrincipal();
+
+            try {
+                manageUser = (ManageUser) subject.getPrincipal();
+            } catch (Exception e) {
+
+            }
 
             if (Objects.isNull(manageUser)) {
                 if (Objects.isNull(handlerMethod.getMethodAnnotation(ResponseBody.class))) {
