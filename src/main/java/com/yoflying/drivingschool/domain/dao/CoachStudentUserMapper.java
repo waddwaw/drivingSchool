@@ -15,8 +15,8 @@ import java.util.List;
 @MapperScan
 public interface CoachStudentUserMapper {
 
-    @Select("SELECT * FROM coach_students WHERE username = #{user} and password = #{pwd} and status = 1")
-    CoachStudentUser findOneByCoachStAndStatusAvailable(@Param("user") String user, @Param("pwd") String pwd);
+    @Select("SELECT * FROM coach_students WHERE username = #{identityCard} and password = #{pwd} and status = 1")
+    CoachStudentUser findOneByCoachStAndStatusAvailable(@Param("identityCard") String identityCard, @Param("pwd") String pwd);
 
     @Select("SELECT * FROM coach_students WHERE dsId = #{dsId} and discern = 2 and status = 1 ORDER BY createTime DESC")
     List<CoachStudentUser> findStByDsIdList(@Param("dsId") Long dsId);

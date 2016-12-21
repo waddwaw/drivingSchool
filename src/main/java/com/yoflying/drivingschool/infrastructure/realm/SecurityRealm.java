@@ -85,28 +85,24 @@ public class SecurityRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-
         //管理平台登录
         if (token instanceof UsernamePasswordToken) {
-
             UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
-
-            //默认账户为手机号码
+            String password = new String(((UsernamePasswordToken) token).getPassword());
             ManageUser manageUser = manageUserService.authentication(usernamePasswordToken.getUsername(),
-                    usernamePasswordToken.getUsername());
+                    password );
 
             if (Objects.isNull(manageUser)) {
                 return null;
             } else {
                 return new SimpleAuthenticationInfo(manageUser, manageUser.getPassword(), this.getName());
             }
-
         }
         if (token instanceof RestAccessToken) {
             RestAccessToken restAccessToken = (RestAccessToken) token;
-
+            String password = new String(((UsernamePasswordToken) token).getPassword());
              CoachStudentUser coachStudent = coachStudentService.authentication(restAccessToken.getUsername(),
-                    restAccessToken.getUsername());
+                     password);
 
             if (Objects.isNull(coachStudent)) {
                 return null;
