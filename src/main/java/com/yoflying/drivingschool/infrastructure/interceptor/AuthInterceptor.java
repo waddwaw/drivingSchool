@@ -46,7 +46,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         if (!Objects.isNull(requiresPermissions) || !Objects.isNull(requiresRoles)) {
             String accesstoken = request.getHeader("accesstoken");
             String category = request.getHeader("category");
-            if (!StringUtils.isEmpty(accesstoken) && StringUtils.isEmpty(category)){
+            if (!StringUtils.isEmpty(accesstoken) && !StringUtils.isEmpty(category)){
                 Token token = tokenService.findTokenBycategoryAndCode(category, accesstoken);
                 if (!Objects.isNull(token)) {
                     RestAccessToken restAccessToken = new RestAccessToken();
