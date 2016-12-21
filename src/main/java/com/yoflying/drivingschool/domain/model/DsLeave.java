@@ -1,17 +1,23 @@
 package com.yoflying.drivingschool.domain.model;
 
 import com.alibaba.fastjson.JSONObject;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 /**
  * Created by liqiang on 16/12/14.
  */
 public class DsLeave extends BaseModel {
+
     private Long id;
     private Long dsId;
+    @NotNull()
     private Long coachId;
+    @NotBlank
     private String leaveDate2;
+    @NotBlank
     private String leaveDate3;
     private int status;
     private Timestamp createTime;

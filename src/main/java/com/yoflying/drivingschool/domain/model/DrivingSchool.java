@@ -1,5 +1,7 @@
 package com.yoflying.drivingschool.domain.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.sql.Timestamp;
 
 /**
@@ -8,7 +10,9 @@ import java.sql.Timestamp;
 public class DrivingSchool extends BaseModel {
 
     private Integer id;
+    @NotBlank(message = "驾校名字不能为空")
     private String dsName;
+    @NotBlank(message = "驾校电话不能为空")
     private String dsPhone;
     private String dsWeb;
     private String logo;

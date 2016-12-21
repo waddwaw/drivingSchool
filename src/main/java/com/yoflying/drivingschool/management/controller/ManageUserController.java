@@ -123,7 +123,7 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/createCoachSt", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult createCoachSt(@RequestBody CoachStudentUser coachStudentUser) {
+    public JsonResult createCoachSt(@RequestBody @Valid CoachStudentUser coachStudentUser) {
 
         coachStudentUser.setDsId(getManageUser().getDsId());
         int err = manageServiceFacade.createCoachSt(coachStudentUser);
@@ -141,7 +141,7 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/createDrivingSchool", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult createDrivingSchool(@RequestBody DrivingSchool drivingSchool) {
+    public JsonResult createDrivingSchool(@RequestBody @Valid DrivingSchool drivingSchool) {
         int err = manageServiceFacade.createDrivingSchool(drivingSchool);
 
         return new JsonResult<String>("", err);
@@ -155,7 +155,7 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/createLeave", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult createLeave(@RequestBody DsLeave dsLeave) {
+    public JsonResult createLeave(@RequestBody @Valid DsLeave dsLeave) {
 
         dsLeave.setDsId(getManageUser().getDsId());
 
@@ -213,7 +213,7 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/settingDrivingConfig", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult settingDrivingConfig(@RequestBody DSSetting dsSetting) {
+    public JsonResult settingDrivingConfig(@RequestBody @Valid DSSetting dsSetting) {
 
         dsSetting.setDsId(getManageUser().getDsId());
 

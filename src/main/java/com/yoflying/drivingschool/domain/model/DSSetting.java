@@ -2,6 +2,7 @@ package com.yoflying.drivingschool.domain.model;
 
 import com.alibaba.fastjson.JSONObject;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 /**
@@ -10,7 +11,9 @@ import java.sql.Timestamp;
 public class DSSetting extends BaseModel {
     private Long id;
     private Long dsId;
+    @NotNull(message = "参数不能为空")
     private String dsAppointment2;
+    @NotNull(message = "参数不能为空")
     private String dsAppointment3;
     private int status;
     private Timestamp createTime;

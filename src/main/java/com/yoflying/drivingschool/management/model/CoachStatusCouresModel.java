@@ -10,13 +10,13 @@ import javax.validation.constraints.NotNull;
  */
 public class CoachStatusCouresModel {
 
-    @NotNull(message = "参数错误")
+    @NotNull(message = "学生ID不能为空")
     private Long studentsId;
 
-    @NotNull(message = "参数错误")
+    @NotNull(message = "教练ID不能为空")
     private Long coachId;
 
-    @NotNull(message = "参数错误")
+    @NotNull(message = "当前学生科目不能为空")
     private Integer course;
 
     public Long getStudentsId() {

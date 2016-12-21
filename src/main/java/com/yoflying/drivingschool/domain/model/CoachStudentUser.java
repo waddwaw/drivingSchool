@@ -1,5 +1,8 @@
 package com.yoflying.drivingschool.domain.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
+import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;
 
 /**
@@ -13,10 +16,14 @@ public class CoachStudentUser extends BaseModel {
     private String username;
     private String password;
     private Long dsId;
+    @NotBlank(message = "姓名不能为空")
     private String name;
     private Integer sex;
+    @Pattern(regexp = "^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}|^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|X|x)$" ,message = "身份证号码格式不正确")
     private String identityCard;
+    @Range(min=1, max=2, message = "包含非法参数")
     private int discern;
+    @Pattern(regexp = "^(13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9])\\d{8}$")
     private String phone;
     private String wechat;
     private String address;
