@@ -113,7 +113,7 @@ public class ManageUserController extends BaseManageControllet {
     @ResponseBody
     public JsonResult createManage(@RequestBody ManageUser manageUser) {
         int err = manageServiceFacade.createManage(manageUser);
-        return new JsonResult<String>("", err);
+        return new JsonResult<String>("创建管理员成功", err);
     }
 
     /**
@@ -129,9 +129,9 @@ public class ManageUserController extends BaseManageControllet {
         int err = manageServiceFacade.createCoachSt(coachStudentUser);
         int discern = coachStudentUser.getDiscern();
         if (discern == 1) {
-            return new JsonResult<String>("", err);
+            return new JsonResult<String>("创建教练成功", err);
         }
-        return new JsonResult<String>("", err);
+        return new JsonResult<String>("创建学员成功", err);
     }
 
     /**
@@ -144,7 +144,7 @@ public class ManageUserController extends BaseManageControllet {
     public JsonResult createDrivingSchool(@RequestBody @Valid DrivingSchool drivingSchool) {
         int err = manageServiceFacade.createDrivingSchool(drivingSchool);
 
-        return new JsonResult<String>("", err);
+        return new JsonResult<String>("创建驾校成功", err);
     }
 
 
@@ -161,7 +161,7 @@ public class ManageUserController extends BaseManageControllet {
 
         int err = manageServiceFacade.createLeave(dsLeave);
 
-        return new JsonResult<String>("", err);
+        return new JsonResult<String>("教练请假成功", err);
     }
 
     /**
@@ -219,7 +219,7 @@ public class ManageUserController extends BaseManageControllet {
 
         int err = manageServiceFacade.settingDrivingconfig(dsSetting);
 
-        return new JsonResult("", err);
+        return new JsonResult("更改驾校配置设置成功", err);
     }
 
 
@@ -237,6 +237,6 @@ public class ManageUserController extends BaseManageControllet {
 
         int err = manageServiceFacade.bindCoachorStatusCourseUpdate(getManageUser().getDsId(), cscModel);
 
-        return new JsonResult("", err);
+        return new JsonResult("操作成功", err);
     }
 }

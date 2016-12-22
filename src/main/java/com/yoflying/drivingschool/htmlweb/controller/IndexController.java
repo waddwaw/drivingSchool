@@ -16,4 +16,10 @@ public class IndexController {
         modelMap.put("index","欢迎使用 柚飞科技约车系统 ！开发人员 姚九龙 李娇 李立强");
         return "/index/index.ftl";
     }
+
+    @RequestMapping("/exception")
+    public String exception(ModelMap modelMap) {
+        modelMap.put("error","错了错啦");
+        return "/exception.ftl";
+    }
 }

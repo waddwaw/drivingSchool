@@ -7,8 +7,9 @@
     <context:annotation-config/>
 
     <!-- 启动组件扫描，排除@Controller组件，该组件由SpringMVC配置文件扫描 -->
-    <context:component-scan base-package="com.yoflying.drivingschool.**.controller"/>
-
+    <context:component-scan base-package="com.yoflying.drivingschool.infrastructure.*"/>
+    <context:component-scan base-package="com.yoflying.drivingschool.**.facade"/>
+    <context:component-scan base-package="com.yoflying.drivingschool.domain.service.impl"/>
     <!--自动扫描Mybatis接口-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.yoflying.drivingschool.domain.dao"/>
