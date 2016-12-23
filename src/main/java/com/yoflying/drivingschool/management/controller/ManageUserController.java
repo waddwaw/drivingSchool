@@ -1,5 +1,6 @@
 package com.yoflying.drivingschool.management.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.yoflying.drivingschool.domain.model.*;
@@ -212,7 +213,7 @@ public class ManageUserController extends BaseManageControllet {
     public JsonResult settingDrivingConfig(@RequestBody @Valid DSSetting dsSetting) {
 
         dsSetting.setDsId(getManageUser().getDsId());
-
+        //{"time":[{"start":"","stop":""},{"start":"","stop":""}],"size":3}
         int err = manageServiceFacade.settingDrivingconfig(dsSetting);
 
         return new JsonResult("更改驾校配置设置成功", err);

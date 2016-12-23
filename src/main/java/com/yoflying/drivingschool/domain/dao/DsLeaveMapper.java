@@ -26,8 +26,8 @@ public interface DsLeaveMapper {
     int updateDsLeave(@Param("status") Integer status, @Param("coachId") Long coachId, @Param("dsId") Long dsId);
 
     @Select("SELECT * FROM ds_setting WHERE dsId = #{dsId} and coachId = #{coachId}")
-    DSSetting findDsLeavebyDsIDandCoachId(@Param("dsId") Long dsId,@Param("coachId") Long coachId);
+    DsLeave findDsLeavebyDsIDandCoachId(@Param("dsId") Long dsId,@Param("coachId") Long coachId);
 
     @Select("SELECT * FROM ds_setting WHERE dsId = #{dsId}")
-    List<DSSetting> findDsLeavebyDsIdALL(@Param("dsId") Long dsId);
+    List<DsLeave> findDsLeavebyDsIdALL(@Param("dsId") Long dsId);
 }

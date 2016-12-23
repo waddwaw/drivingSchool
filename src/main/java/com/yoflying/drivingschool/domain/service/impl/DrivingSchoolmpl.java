@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by liqiang on 16/12/14.
@@ -23,5 +24,9 @@ public class DrivingSchoolmpl implements DrivingSchoolService {
 
     public DrivingSchool findByDrivingSchool(@Param("id") long id) {
         return drivingSchoolMapper.findByDrivingSchool(id);
+    }
+
+    public List<DrivingSchool> findDrivingSchoolByStatusAll() {
+        return drivingSchoolMapper.findDrivingSchoolByStatusAll();
     }
 }

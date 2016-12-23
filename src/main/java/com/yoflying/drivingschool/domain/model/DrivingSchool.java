@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  */
 public class DrivingSchool extends BaseModel {
 
-    private Integer id;
+    private Long id;
     @NotBlank(message = "驾校名字不能为空")
     private String dsName;
     @NotBlank(message = "驾校电话不能为空")
@@ -20,11 +20,11 @@ public class DrivingSchool extends BaseModel {
     private Timestamp createTime;
     private Timestamp modifyTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

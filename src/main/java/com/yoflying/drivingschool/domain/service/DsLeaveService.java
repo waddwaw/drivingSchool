@@ -17,8 +17,8 @@ public interface DsLeaveService {
     int updateDsLeave(Integer status, Long coachId, Long dsId);
 
 
-    DSSetting findDsLeavebyDsIDandCoachId(Long dsId, Long coachId);
+    DsLeave findDsLeavebyDsIDandCoachId(Long dsId, Long coachId);
 
 
-    List<DSSetting> findDsLeavebyDsIdALL(Long dsId);
+    List<DsLeave> findDsLeavebyDsIdALL(Long dsId);
 }

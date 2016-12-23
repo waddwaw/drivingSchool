@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.mybatis.spring.annotation.MapperScan;
 
+import java.util.List;
+
 
 /**
  * Created by liqiang on 16/12/14.
@@ -19,5 +21,8 @@ public interface DrivingSchoolMapper {
 
     @Select("SELECT * FROM drivingSchool WHERE id = #{id} and status = 1")
     DrivingSchool findByDrivingSchool( @Param("id") long id);
+
+    @Select("SELECT * FROM drivingSchool WHERE and status = 1")
+    List<DrivingSchool> findDrivingSchoolByStatusAll();
 
 }

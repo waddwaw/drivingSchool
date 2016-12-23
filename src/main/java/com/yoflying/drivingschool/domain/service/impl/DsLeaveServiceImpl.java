@@ -25,11 +25,11 @@ public class DsLeaveServiceImpl implements DsLeaveService{
         return dsLeaveMapper.updateDsLeave(status, coachId, dsId);
     }
 
-    public DSSetting findDsLeavebyDsIDandCoachId(Long dsId, Long coachId) {
+    public DsLeave findDsLeavebyDsIDandCoachId(Long dsId, Long coachId) {
         return dsLeaveMapper.findDsLeavebyDsIDandCoachId(dsId, coachId);
     }
 
-    public List<DSSetting> findDsLeavebyDsIdALL(Long dsId) {
+    public List<DsLeave> findDsLeavebyDsIdALL(Long dsId) {
         return dsLeaveMapper.findDsLeavebyDsIdALL(dsId);
     }
 }

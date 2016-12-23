@@ -11,20 +11,22 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd">
 
 
-     <!--使Spring支持自动检测组件，如注解的 Controller-->
+    <!--使Spring支持自动检测组件，如注解的 Controller-->
     <context:component-scan base-package="com.yoflying.drivingschool.**.controller"/>
     <context:component-scan base-package="com.yoflying.drivingschool.exception"/>
-
+    <context:component-scan base-package="com.yoflying.drivingschool.task"/>
     <!--扫描controller（controller层注入）-->
-    <!--<context:annotation-config/>-->
-    <mvc:annotation-driven />
-    <!--<task:annotation-driven/>-->
+    <context:annotation-config/>
+    <mvc:annotation-driven/>
+    <task:annotation-driven/>
 
     <!-- 启用shrio授权注解拦截方式 -->
-    <aop:config proxy-target-class ="true"/>
+    <aop:config proxy-target-class="true"/>
 
     <!-- 设置上传文件的最大尺寸为10MB -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -33,7 +35,7 @@
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
-     <!--支持返回json(避免IE在ajax请求时，返回json出现下载 )-->
+    <!--支持返回json(避免IE在ajax请求时，返回json出现下载 )-->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
             <list>
@@ -54,20 +56,20 @@
     <!--<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>-->
 
     <!--<mvc:annotation-driven>-->
-        <!--<mvc:message-converters>-->
-            <!--<bean  id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
-                <!--&lt;!&ndash; True only for the blog article - a production system would set this to false to reduce-->
-                     <!--the number of bytes sent across the wire: &ndash;&gt;-->
-                <!--<property name="prettyPrint" value="true"/>-->
-                <!--<property name="supportedMediaTypes">-->
-                <!--<list>-->
-                <!--<value>text/plain;charset=UTF-8</value>-->
-                <!--<value>application/json;charset=UTF-8</value>-->
-                <!--</list>-->
-                <!--</property>-->
-            <!--</bean>-->
-            <!--<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>-->
-        <!--</mvc:message-converters>-->
+    <!--<mvc:message-converters>-->
+    <!--<bean  id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+    <!--&lt;!&ndash; True only for the blog article - a production system would set this to false to reduce-->
+    <!--the number of bytes sent across the wire: &ndash;&gt;-->
+    <!--<property name="prettyPrint" value="true"/>-->
+    <!--<property name="supportedMediaTypes">-->
+    <!--<list>-->
+    <!--<value>text/plain;charset=UTF-8</value>-->
+    <!--<value>application/json;charset=UTF-8</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>-->
+    <!--</mvc:message-converters>-->
     <!--</mvc:annotation-driven>-->
 
 
@@ -77,18 +79,18 @@
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**" />
+            <mvc:mapping path="/**"/>
             <!--<mvc:exclude-mapping path="/manage/**"/>-->
             <!--<mvc:exclude-mapping path="/coachstudent/**"/>-->
-            <ref bean="authInterceptor" />
+            <ref bean="authInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/coachstudent/**" />
-            <ref bean="coachStudentInterceptor" />
+            <mvc:mapping path="/coachstudent/**"/>
+            <ref bean="coachStudentInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/manage/**" />
-            <ref bean="managementInterceptor" />
+            <mvc:mapping path="/manage/**"/>
+            <ref bean="managementInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
@@ -99,16 +101,16 @@
 
     <!-- 配置Freemarker屬性文件路徑 -->
     <!--<bean id="freemarkerConfiguration"        class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
-        <!--<property name="location" value="classpath:conf/freemarker.properties" />-->
+    <!--<property name="location" value="classpath:conf/freemarker.properties" />-->
     <!--</bean>-->
 
     <!-- 配置freeMarker模板加載地址 -->
-    <bean id="freemarkerConfig"        class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <!-- 視圖解析器會在/WEB-INF/ftl/路徑下掃描視圖文件 -->
-        <property name="templateLoaderPath" value="classpath:/html/" />
+        <property name="templateLoaderPath" value="classpath:/html/"/>
         <property name="freemarkerVariables">
             <map>
-                <entry key="xml_escape" value-ref="fmXmlEscape" />
+                <entry key="xml_escape" value-ref="fmXmlEscape"/>
             </map>
         </property>
         <property name="freemarkerSettings">
@@ -122,27 +124,27 @@
             </props>
         </property>
     </bean>
-    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
     <!-- 配置 freemakerView 解析器 -->
-    <bean id="freemakerViewResolver"        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="viewClass"        value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+    <bean id="freemakerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
         <!-- 扫描ftl 文件 -->
-        <property name="contentType" value="text/html; charset=UTF-8" />
-        <property name="exposeRequestAttributes" value="true" />
-        <property name="exposeSessionAttributes" value="true" />
-        <property name="exposeSpringMacroHelpers" value="true" />
-        <property name="requestContextAttribute" value="request" />
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="requestContextAttribute" value="request"/>
         <!-- 给视图解析器优先级，你可以給之前jsp视图解析器的值配为2 -->
-        <property name="order" value="1" />
+        <property name="order" value="1"/>
     </bean>
 
     <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
-        <!--<property name="exceptionMappings">-->
-            <!--<props>-->
-                <!--<prop key="org.apache.shiro.authz.UnauthorizedException">redirect:/err401</prop>-->
-                <!--<prop key="org.apache.shiro.authz.UnauthenticatedException">redirect:/login</prop>-->
-            <!--</props>-->
-        <!--</property>-->
+    <!--<property name="exceptionMappings">-->
+    <!--<props>-->
+    <!--<prop key="org.apache.shiro.authz.UnauthorizedException">redirect:/err401</prop>-->
+    <!--<prop key="org.apache.shiro.authz.UnauthenticatedException">redirect:/login</prop>-->
+    <!--</props>-->
+    <!--</property>-->
     <!--</bean>-->
 
 </beans>
