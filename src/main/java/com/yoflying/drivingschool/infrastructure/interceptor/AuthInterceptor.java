@@ -55,6 +55,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                     restAccessToken.setCategory(token.getCategory());
                     Subject subject = SecurityUtils.getSubject();
                     subject.login(restAccessToken);
+                    subject.getSession().setTimeout(1000 * 30);
                 }
             }
 

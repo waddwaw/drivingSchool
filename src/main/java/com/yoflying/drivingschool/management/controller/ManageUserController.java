@@ -78,12 +78,8 @@ public class ManageUserController extends BaseManageControllet {
             return new JsonResult<String>("用户密码不能为空", ErrorDef.USER_PASS_ERROR);
         }
         Subject subject = SecurityUtils.getSubject();
-
-        token.setRememberMe(true);
         try {
             subject.login(token);
-            SecurityUtils.getSubject().getSession().setTimeout(1000 * 10);
-
         }catch (AuthenticationException e) {
             token.clear();
             return new JsonResult<String>("用户密码错误", ErrorDef.USER_PASS_ERROR);

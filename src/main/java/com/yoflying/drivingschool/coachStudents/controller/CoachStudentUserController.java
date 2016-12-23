@@ -42,11 +42,8 @@ public class CoachStudentUserController extends BaseCsController{
             return new JsonResult<Integer>("用户密码不能为空", ErrorDef.USER_PASS_ERROR);
         }
         Subject subject = SecurityUtils.getSubject();
-
-        token.setRememberMe(true);
         try {
             subject.login(token);
-            SecurityUtils.getSubject().getSession().setTimeout(1000 * 11);
             CoachStudentUser coachStudentUser = getCoachStudentUser();
             if (coachStudentUser.getDiscern() == CoachStudentUser.COACH ) {
                 return new JsonResult<Integer>(ErrorDef.SUCCESS, "欢迎教练登录", CoachStudentUser.COACH);
