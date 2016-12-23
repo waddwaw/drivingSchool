@@ -40,16 +40,16 @@ public class ApporintmentTask {
     private int day;
 
     //    @Scheduled(cron ="0 0 2 * * ?")
-    public void AppointmentTask() {
+    public void appointmentTask() {
         day = 0;
         drivingSchools = drivingSchoolService.findDrivingSchoolByStatusAll();
-        while (day < 7) {  // 每次生成一周的预约信息
+        while (day < 1) {  // 每次生成一周的预约信息
             for (DrivingSchool drivingSchool : drivingSchools) {
                 List<CoachStudentUser> coachStudentUsers = coachStudentService.findCoachByDsIdList(drivingSchool.getId());
                 DSSetting dsSetting = dsSettingService.findOneDSSetting(drivingSchool.getId());
                 List<Long> outCoachIds = (List<Long>) JSON.parse(dsSetting.getOutCoachIds());
                 for (CoachStudentUser coachStudentUser : coachStudentUsers) {
-                    if (outCoachIds.contains(coachStudentUser.getId())) {
+                    if (outCoachIds != null && outCoachIds.contains(coachStudentUser.getId())) {
                         continue;
                     }
                     DsLeave dsLeaves = dsLeaveService.findDsLeavebyDsIDandCoachId(drivingSchool.getId(), coachStudentUser.getId());
@@ -70,14 +70,16 @@ public class ApporintmentTask {
                     for (int i = 0; i < setting2Arr.size(); i++) {
                         String start = setting2Arr.getJSONObject(i).getString("start");
                         String stop = setting2Arr.getJSONObject(i).getString("stop");
-                        insetApporintment(taskTime, start, stop, cta2, dsLeaves.getLeaveDate2(), setting2.getInteger("size"), coachStudentUser.getId(), coachStudentUser.getDsId());
+                        insetApporintment(taskTime, start, stop, cta2, dsLeaves == null ? "" : dsLeaves.getLeaveDate2(),
+                                setting2.getInteger("size"), coachStudentUser.getId(), coachStudentUser.getDsId(), CoachTestaAddress.COURSE2);
                     }
                     JSONObject setting3 = (JSONObject) JSON.parse(dsSetting.getDsAppointment3());
                     JSONArray setting3Arr = (JSONArray) JSON.parse(setting3.getString("time"));
                     for (int i = 0; i < setting3Arr.size(); i++) {
                         String start = setting3Arr.getJSONObject(i).getString("start");
                         String stop = setting3Arr.getJSONObject(i).getString("stop");
-                        insetApporintment(taskTime, start, stop, cta3, dsLeaves.getLeaveDate2(), setting3.getInteger("size"), coachStudentUser.getId(), coachStudentUser.getDsId());
+                        insetApporintment(taskTime, start, stop, cta3, dsLeaves == null ? "" : dsLeaves.getLeaveDate3(),
+                                setting3.getInteger("size"), coachStudentUser.getId(), coachStudentUser.getDsId(), CoachTestaAddress.COURSE3);
                     }
                 }
             }
@@ -85,7 +87,7 @@ public class ApporintmentTask {
         }
     }
 
-    private void insetApporintment(String taskTime, String start, String stop, String address, String leaves, int size, long coachId, long dsId) {
+    private void insetApporintment(String taskTime, String start, String stop, String address, String leaves, int size, long coachId, long dsId, int testCoures) {
         if (StringUtils.isEmpty(address)) {
             return;
         }
@@ -97,6 +99,7 @@ public class ApporintmentTask {
         appointmentStJson.put("time",obj);
         appointmentStJson.put("size",size);
         appointmentSt.setAppointmentDate(appointmentStJson.toJSONString());
+        appointmentSt.setTestCourse(testCoures);
         appointmentSt.setTestAddress(address);
         appointmentSt.setCoachId(coachId);
         appointmentSt.setDsId(dsId);

@@ -22,7 +22,7 @@ public interface DrivingSchoolMapper {
     @Select("SELECT * FROM drivingSchool WHERE id = #{id} and status = 1")
     DrivingSchool findByDrivingSchool( @Param("id") long id);
 
-    @Select("SELECT * FROM drivingSchool WHERE and status = 1")
+    @Select("SELECT * FROM drivingSchool WHERE status = 1")
     List<DrivingSchool> findDrivingSchoolByStatusAll();
 
 }

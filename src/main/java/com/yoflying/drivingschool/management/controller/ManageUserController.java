@@ -11,6 +11,7 @@ import com.yoflying.drivingschool.constdef.ErrorDef;
 import com.yoflying.drivingschool.domain.service.ManageUserService;
 import com.yoflying.drivingschool.management.facade.ManageServiceFacade;
 import com.yoflying.drivingschool.management.model.CoachStatusCouresModel;
+import com.yoflying.drivingschool.task.ApporintmentTask;
 import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -88,6 +89,9 @@ public class ManageUserController extends BaseManageControllet {
         return new JsonResult<String>("登录成功", ErrorDef.SUCCESS);
     }
 
+//    @Autowired
+//    ApporintmentTask apporintmentTask;
+
     @RequestMapping(value = "/index")
     @RequiresRoles(RoleSign.ADMIN)
     public String index (ModelMap map) {
@@ -97,6 +101,7 @@ public class ManageUserController extends BaseManageControllet {
 //        List<User> users = userMapper.byListUserName(name);
 //        long total  = ((Page) users).getTotal();
         ManageUser manageUser = getManageUser();
+//        apporintmentTask.appointmentTask();
 
         return "/manage/index.ftl";
     }
