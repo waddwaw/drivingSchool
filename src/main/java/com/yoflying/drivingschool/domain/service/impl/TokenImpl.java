@@ -19,7 +19,7 @@ public class TokenImpl implements TokenService{
         return tokenMapper.insertToken(token);
     }
 
-    public Token findTokenBycategoryAndCode(String category, String tokenCode) {
-        return tokenMapper.findTokenBycategoryAndCode(category, tokenCode);
+    public Token findTokenBycategoryAndCode(String tokenCode) {
+        return tokenMapper.findTokenBycategoryAndCode(tokenCode);
     }
 }

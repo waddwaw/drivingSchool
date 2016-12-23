@@ -17,5 +17,5 @@ public interface TokenMapper {
     int insertToken(Token token);
 
     @Select("SELECT * FROM user_token WHERE category = #{category} and  tokenCode = #{tokenCode}")
-    Token findTokenBycategoryAndCode(@Param("category") String category, @Param("tokenCode") String tokenCode);
+    Token findTokenBycategoryAndCode(@Param("tokenCode") String tokenCode);
 }

@@ -45,9 +45,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         //对需要权限认证的接口进行拦截操作
         if (!Objects.isNull(requiresPermissions) || !Objects.isNull(requiresRoles)) {
             String accesstoken = request.getHeader("accesstoken");
-            String category = request.getHeader("category");
-            if (!StringUtils.isEmpty(accesstoken) && !StringUtils.isEmpty(category)){
-                Token token = tokenService.findTokenBycategoryAndCode(category, accesstoken);
+            if (!StringUtils.isEmpty(accesstoken)){
+                Token token = tokenService.findTokenBycategoryAndCode(accesstoken);
                 if (!Objects.isNull(token)) {
                     RestAccessToken restAccessToken = new RestAccessToken();
                     restAccessToken.setUserId(token.getUserId());
