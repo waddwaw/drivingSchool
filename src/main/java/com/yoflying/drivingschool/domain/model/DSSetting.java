@@ -15,9 +15,18 @@ public class DSSetting extends BaseModel {
     private String dsAppointment2;
     @NotNull(message = "参数不能为空")
     private String dsAppointment3;
+    private String outCoachIds;
     private int status;
     private Timestamp createTime;
     private Timestamp modifyTime;
+
+    public String getOutCoachIds() {
+        return outCoachIds;
+    }
+
+    public void setOutCoachIds(String outCoachIds) {
+        this.outCoachIds = outCoachIds;
+    }
 
     public Long getId() {
         return id;

@@ -24,5 +24,5 @@ public interface AppointmentStService {
 
     List<AppointmentSt> findAppointmentStbysDsIdALL(Long dsId);
 
-    int deleteAppointmentStbyStatusALL(int status);
+    int deleteAppointmentStbyIdALL(int status);
 }

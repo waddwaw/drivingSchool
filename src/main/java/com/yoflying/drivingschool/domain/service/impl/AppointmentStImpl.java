@@ -38,7 +38,7 @@ public class AppointmentStImpl implements AppointmentStService {
         return appointmentStMapper.findAppointmentStbysDsIdALL(dsId);
     }
 
-    public int deleteAppointmentStbyStatusALL(int status) {
-        return appointmentStMapper.deleteAppointmentStbyStatusALL(status);
+    public int deleteAppointmentStbyIdALL(int id) {
+        return appointmentStMapper.deleteAppointmentStbyStatusALL(id);
     }
 }

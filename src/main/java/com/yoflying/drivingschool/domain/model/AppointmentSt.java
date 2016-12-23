@@ -14,7 +14,7 @@ public class AppointmentSt extends BaseModel{
     private Integer testCourse;
     private String testAddress;
     private String studentsIds;
-    private Timestamp appointmentDate;
+    private String appointmentDate;
     private int status;
     private Timestamp createTime;
     private Timestamp modifyTime;
@@ -67,11 +67,11 @@ public class AppointmentSt extends BaseModel{
         this.studentsIds = studentsIds;
     }
 
-    public Timestamp getAppointmentDate() {
+    public String getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Timestamp appointmentDate) {
+    public void setAppointmentDate(String appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 

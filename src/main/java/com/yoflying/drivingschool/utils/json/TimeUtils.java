@@ -1,8 +1,10 @@
 package com.yoflying.drivingschool.utils.json;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by arvin on 2016/12/23.
@@ -24,5 +26,17 @@ public class TimeUtils {
         String backTime = format.format(d);
 //        System.out.println("增加天数以后的日期：" + backTime);
         return backTime;
+    }
+
+    public static int getAMorPM(String time) {
+        SimpleDateFormat format = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
+        GregorianCalendar ca = new GregorianCalendar();
+        try {
+            ca.setTime(format.parse(time));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return ca.get(GregorianCalendar.AM_PM);
     }
 }
