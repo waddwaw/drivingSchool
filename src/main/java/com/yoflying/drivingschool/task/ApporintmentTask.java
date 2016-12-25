@@ -94,10 +94,10 @@ public class ApporintmentTask {
         AppointmentSt appointmentSt = new AppointmentSt();
         JSONObject appointmentStJson = new JSONObject();
         JSONObject obj = new JSONObject();
-        obj.put("start",taskTime + " " + start);
-        obj.put("stop",taskTime + " " + stop);
-        appointmentStJson.put("time",obj);
-        appointmentStJson.put("size",size);
+        obj.put("start", taskTime + " " + start);
+        obj.put("stop", taskTime + " " + stop);
+        appointmentStJson.put("time", obj);
+        appointmentStJson.put("size", size);
         appointmentSt.setAppointmentDate(appointmentStJson.toJSONString());
         appointmentSt.setTestCourse(testCoures);
         appointmentSt.setTestAddress(address);
@@ -106,8 +106,8 @@ public class ApporintmentTask {
         appointmentSt.setStatus(1);
         if (StringUtils.isEmpty(leaves)) {
             appointmentStService.insertAppointmentSt(appointmentSt);
-        }else { //处理请假 半天为一个单位
-            if(!(TimeUtils.getAMorPM(leaves) == TimeUtils.getAMorPM(taskTime + " " + start))){
+        } else { //处理请假 半天为一个单位
+            if (!(TimeUtils.getAMorPM(leaves) == TimeUtils.getAMorPM(taskTime + " " + start))) {
                 appointmentStService.insertAppointmentSt(appointmentSt);
             }
         }
