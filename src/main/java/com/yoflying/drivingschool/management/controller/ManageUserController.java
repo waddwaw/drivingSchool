@@ -124,6 +124,7 @@ public class ManageUserController extends BaseManageControllet {
      * @return
      */
     @RequestMapping(value = "/createCoachSt", method = RequestMethod.POST)
+    @RequiresRoles(RoleSign.ADMIN)
     @ResponseBody
     public JsonResult createCoachSt(@RequestBody @Valid CoachStudentUser coachStudentUser) {
 
@@ -173,6 +174,7 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/findStudentList")
     @ResponseBody
+    @RequiresRoles(RoleSign.ADMIN)
     public JsonResult findStudentbyDsIdList(Integer pageNum) {
         ManageUser manageUser = getManageUser();
 
@@ -186,6 +188,7 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/searchCoachStList")
     @ResponseBody
+    @RequiresRoles(RoleSign.ADMIN)
     public JsonResult searchCoachStList(Integer discern, String name) {
 
         if ( !(discern <= 2) || !(discern > 0) ||StringUtils.isEmpty(name)) {
@@ -202,6 +205,7 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/findCoachList")
     @ResponseBody
+    @RequiresRoles(RoleSign.ADMIN)
     public JsonResult findCoachbyDsIdList(Integer pageNum) {
         ManageUser manageUser = getManageUser();
 
@@ -215,6 +219,7 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/settingDrivingConfig", method = RequestMethod.POST)
     @ResponseBody
+    @RequiresRoles(RoleSign.ADMIN)
     public JsonResult settingDrivingConfig(@RequestBody @Valid DSSetting dsSetting) {
 
         dsSetting.setDsId(getManageUser().getDsId());
@@ -231,6 +236,7 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/bindCSCUpdate", method = RequestMethod.POST)
     @ResponseBody
+    @RequiresRoles(RoleSign.ADMIN)
     public JsonResult bindCoachorStatusCourseUpdate(@RequestBody @Valid CoachStatusCouresModel cscModel, BindingResult result) {
 
         if(result.hasErrors()) {
