@@ -23,12 +23,12 @@ public class CoachStudentUser extends BaseModel {
     private String identityCard;
     @Range(min=1, max=2, message = "包含非法参数")
     private int discern;
-    @Pattern(regexp = "^(13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9])\\d{8}$")
+    @Pattern(regexp = "^(13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9])\\d{8}$", message = "手机号码错误")
     private String phone;
     private String wechat;
     private String address;
-    private Integer course;
-    private Integer coachId;
+    private int course;
+    private int coachId;
     private int status;
     private Timestamp createTime;
     private Timestamp modifyTime;

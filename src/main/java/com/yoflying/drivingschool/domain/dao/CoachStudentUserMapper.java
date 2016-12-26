@@ -36,7 +36,7 @@ public interface CoachStudentUserMapper {
     List<CoachStudentUser> findStByDsIdAndNameList(@Param("dsId") Long dsId, @Param("name") String name);
 
     @Insert("INSERT INTO coach_students (username, password,dsId,name,sex,identityCard,discern,phone,wechat,address" +
-            "course,coachId,status,modifyTime)" +
+            ",course,coachId,status,modifyTime)" +
             " VALUES(#{username},#{password},#{dsId},#{name},#{sex},#{identityCard},#{discern},#{phone},#{wechat},#{address}" +
             ",#{course},#{coachId},#{status},NOW())")
     int insertCoachStudentUser(CoachStudentUser coachStudentUser);

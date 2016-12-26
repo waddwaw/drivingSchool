@@ -126,7 +126,11 @@ public class ManageUserController extends BaseManageControllet {
     @RequestMapping(value = "/createCoachSt", method = RequestMethod.POST)
     @RequiresRoles(RoleSign.ADMIN)
     @ResponseBody
-    public JsonResult createCoachSt(@RequestBody @Valid CoachStudentUser coachStudentUser) {
+    public JsonResult createCoachSt(@RequestBody @Valid CoachStudentUser coachStudentUser, BindingResult result) {
+
+        if(result.hasErrors()) {
+            return getErrors(result);
+        }
 
         coachStudentUser.setDsId(getManageUser().getDsId());
         int err = manageServiceFacade.createCoachSt(coachStudentUser);
