@@ -1,5 +1,7 @@
 package com.yoflying.drivingschool.htmlweb.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class IndexController {
-
+    private final Logger logger = LoggerFactory.getLogger(IndexController.class);
     @RequestMapping("/index")
     public String index(ModelMap modelMap) {
         modelMap.put("index","欢迎使用 柚飞科技约车系统 ！开发人员 姚九龙 李娇 李立强");
@@ -21,5 +23,11 @@ public class IndexController {
     public String exception(ModelMap modelMap) {
         modelMap.put("error","错了错啦");
         return "/exception.ftl";
+    }
+
+    @RequestMapping("/404")
+    public String err404(ModelMap modelMap) {
+
+        return "/index/404.ftl";
     }
 }

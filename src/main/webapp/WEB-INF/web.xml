@@ -105,10 +105,10 @@
         <!--<exception-type>java.lang.Exception</exception-type>-->
         <!--<location>/exception.jsp</location>-->
     <!--</error-page>-->
-    <!--<error-page>-->
-        <!--<error-code>404</error-code>-->
-        <!--<location>/404.jsp</location>-->
-    <!--</error-page>-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.html</location>
+    </error-page>
     <!--<error-page>-->
         <!--<error-code>505</error-code>-->
         <!--<location>/exception.jsp</location>-->
