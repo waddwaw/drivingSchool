@@ -3,10 +3,13 @@ package com.yoflying.drivingschool.coachStudents.controller;
 import com.yoflying.drivingschool.coachStudents.BaseCsController;
 import com.yoflying.drivingschool.constdef.ErrorDef;
 import com.yoflying.drivingschool.domain.model.CoachStudentUser;
+import com.yoflying.drivingschool.infrastructure.realm.RoleSign;
 import com.yoflying.drivingschool.infrastructure.token.ManageToken;
 import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +33,18 @@ public class CoachStudentUserController extends BaseCsController{
     public String login() {
 
         return "";
+    }
+
+    /**
+     * 获取当前学员or教练信息
+     * @return
+     */
+    @RequestMapping(value = "/coachstudentInfo")
+    @RequiresRoles(value = {RoleSign.STUDENT, RoleSign.COACH }, logical = Logical.OR )
+    @ResponseBody
+    public JsonResult coachstudentInfo() {
+
+        return new JsonResult<CoachStudentUser>(ErrorDef.SUCCESS, "获取用户信息成功", getCoachStudentUser());
     }
 
     //  username  password  host Ip地址

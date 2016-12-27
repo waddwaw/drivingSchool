@@ -2,6 +2,23 @@
 <ehcache updateCheck="false" name="txswx-ehcache">
     <diskStore path="java.io.tmpdir"/>
     <!-- DefaultCache setting. -->
-    <defaultCache maxEntriesLocalHeap="1000" eternal="true" timeToIdleSeconds="300" timeToLiveSeconds="600"
-                  overflowToDisk="true" maxEntriesLocalDisk="10000"/>
+    <defaultCache maxEntriesLocalHeap="1000"
+                  eternal="true"
+                  timeToIdleSeconds="300"
+                  timeToLiveSeconds="600"
+                  overflowToDisk="true"
+                  maxEntriesLocalDisk="10000"/>
+    <cache name="shiro-activeSessionCache"
+           maxEntriesLocalHeap="100000"
+           eternal="false"
+           timeToIdleSeconds="120"
+           timeToLiveSeconds="120"
+           statistics="true"/>
+
+    <cache name="org.apache.shiro.realm.SimpleAccountRealm.authorization"
+           maxEntriesLocalHeap="100000"
+           eternal="false"
+           timeToIdleSeconds="360"
+           timeToLiveSeconds="360"
+           statistics="true"/>
 </ehcache>

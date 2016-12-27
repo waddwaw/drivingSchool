@@ -89,6 +89,18 @@ public class ManageUserController extends BaseManageControllet {
         return new JsonResult<String>("登录成功", ErrorDef.SUCCESS);
     }
 
+    /**
+     * 获取当前管理员信息
+     * @return
+     */
+    @RequestMapping("/manageInfo")
+    @ResponseBody
+    @RequiresRoles(RoleSign.ADMIN)
+    public JsonResult<ManageUser> manageInfo () {
+
+        return new JsonResult<ManageUser>(ErrorDef.SUCCESS, "成功", getManageUser());
+    }
+
 //    @Autowired
 //    ApporintmentTask apporintmentTask;
 

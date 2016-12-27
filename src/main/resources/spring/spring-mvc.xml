@@ -76,12 +76,13 @@
     <!-- static files, Javascript html images-->
     <!--<mvc:resources mapping="/contents/**" location="/contents/"/>-->
     <!--<mvc:resources mapping="/management/**" location="/management/"/>-->
+    <!-- 静态资源访问 -->
+    <mvc:resources mapping="/html/**" location="/html/"/>
 
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <!--<mvc:exclude-mapping path="/manage/**"/>-->
-            <!--<mvc:exclude-mapping path="/coachstudent/**"/>-->
+            <mvc:exclude-mapping path="/html/**"/>
             <ref bean="authInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
@@ -96,8 +97,6 @@
 
     <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
 
-    <!-- 静态资源访问 -->
-    <!--<mvc:resources mapping="/resources/**" location="/resources"/>-->
 
     <!-- 配置Freemarker屬性文件路徑 -->
     <!--<bean id="freemarkerConfiguration"        class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
@@ -106,8 +105,8 @@
 
     <!-- 配置freeMarker模板加載地址 -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <!-- 視圖解析器會在/WEB-INF/ftl/路徑下掃描視圖文件 -->
-        <property name="templateLoaderPath" value="classpath:/html/"/>
+        <!-- 視圖解析器會在/WEB-INF/ftl/路徑下掃描視圖文件  classpath: -->
+        <property name="templateLoaderPath" value="/html/freemarker"/>
         <property name="freemarkerVariables">
             <map>
                 <entry key="xml_escape" value-ref="fmXmlEscape"/>
