@@ -1,3 +1,4 @@
+<@compress single_line=true>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,3 +10,4 @@
 <p>目前系统开发人员列表  ： 姚九龙、李娇、李立强</p>
 </body>
 </html>
+</@compress>
