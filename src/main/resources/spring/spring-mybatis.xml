@@ -108,6 +108,9 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.yoflying.drivingschool.domain.dao"
           p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
 
+    <!-- 临时处理报错信息 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
     <!-- 对dataSource 数据源进行事务管理 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
@@ -128,10 +131,10 @@
     </tx:advice>
 
     <!-- 事务 aop 配置 -->
-    <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* com.shiro.service..*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
-    </aop:config>
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="serviceMethods" expression="execution(* com.shiro.service..*(..))"/>-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>-->
+    <!--</aop:config>-->
 
     <!-- 配置使Spring采用CGLIB代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
