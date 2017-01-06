@@ -3,6 +3,7 @@ package com.yoflying.drivingschool.domain.service;
 import com.yoflying.drivingschool.domain.model.CoachStudentUser;
 import com.yoflying.drivingschool.domain.model.ManageUser;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

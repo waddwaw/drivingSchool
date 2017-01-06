@@ -14,6 +14,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,7 @@ public class CoachStudentUserController extends BaseCsController{
     @RequestMapping(value = "/login")
     public String login() {
 
-        return "";
+        return "/coachSt/login.ftl";
     }
 
     /**
@@ -50,6 +51,7 @@ public class CoachStudentUserController extends BaseCsController{
     //  username  password  host Ip地址
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
     @ResponseBody
+    @Transactional
     public JsonResult<Integer> loginPost (@RequestBody ManageToken token) {
         logger.info("coachstudent" + token.getUsername() + "---------" + token.getHost());
 

@@ -6,6 +6,7 @@
     <settings>
         <!-- 打印查询语句 -->
         <setting name="logImpl" value="STDOUT_LOGGING" />
+        <setting name="cacheEnabled" value="true"/>
     </settings>
 
     <!-- mapper已经在spring-mybatis.xml中的sqlSessionFactory配置，这里不再需要配置 -->

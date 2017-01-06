@@ -19,8 +19,8 @@
         <project.build.jdk>1.8</project.build.jdk>
         <spring.version>4.2.5.RELEASE</spring.version>
         <jackson.version>2.5.1</jackson.version>
-        <mybatis.version>3.2.8</mybatis.version>
-        <mybatis.spring.version>1.3.0</mybatis.spring.version>
+        <mybatis.version>3.4.2</mybatis.version>
+        <mybatis.spring.version>1.3.1</mybatis.spring.version>
         <druid.version>0.1.18</druid.version>
         <mysql.connector.version>5.1.30</mysql.connector.version>
         <tomcat.jdbc.version>7.0.53</tomcat.jdbc.version>

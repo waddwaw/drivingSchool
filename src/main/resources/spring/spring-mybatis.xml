@@ -60,8 +60,57 @@
         <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
 
         <!-- 配置监控统计拦截的filters -->
-        <property name="filters" value="stat"/>
+        <property name="filters" value="log4j"/>
     </bean>
+
+
+    <!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
+        <!--<property name="dataSource" ref="dataSource" />-->
+    <!--</bean>-->
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 启用对事务注解的支持 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+
+
+    <!-- 事务管理 通知 -->
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!--&lt;!&ndash; 对insert,update,delete 开头的方法进行事务管理,只要有异常就回滚 &ndash;&gt;-->
+            <!--<tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>-->
+            <!--<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>-->
+            <!--<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>-->
+            <!--&lt;!&ndash; select,count开头的方法,开启只读,提高数据库访问性能 &ndash;&gt;-->
+            <!--<tx:method name="select*" read-only="true"/>-->
+            <!--<tx:method name="count*" read-only="true"/>-->
+            <!--&lt;!&ndash; 对其他方法 使用默认的事务管理 &ndash;&gt;-->
+            <!--<tx:method name="*"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+
+    <!-- 事务 aop 配置 -->
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="serviceMethods" expression="execution(* com.yoflying.drivingschool..*.*(..))"/>-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>-->
+    <!--</aop:config>-->
+
+    <!-- 配置使Spring采用CGLIB代理 -->
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+
+
+    <!-- Cache配置 -->
+    <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>
+
+    <bean id="ehCacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+          p:configLocation="classpath:/config/ehcache.xml"/>
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
+          p:cacheManager-ref="ehCacheManagerFactory"/>
+
 
     <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -107,47 +156,5 @@
     <!-- spring与mybatis整合配置，扫描所有dao -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.yoflying.drivingschool.domain.dao"
           p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
-
-    <!-- 临时处理报错信息 -->
-    <tx:annotation-driven transaction-manager="transactionManager" />
-
-    <!-- 对dataSource 数据源进行事务管理 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-          p:dataSource-ref="dataSource"/>
-
-    <!-- 事务管理 通知 -->
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <!-- 对insert,update,delete 开头的方法进行事务管理,只要有异常就回滚 -->
-            <tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>
-            <tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>
-            <tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>
-            <!-- select,count开头的方法,开启只读,提高数据库访问性能 -->
-            <tx:method name="select*" read-only="true"/>
-            <tx:method name="count*" read-only="true"/>
-            <!-- 对其他方法 使用默认的事务管理 -->
-            <tx:method name="*"/>
-        </tx:attributes>
-    </tx:advice>
-
-    <!-- 事务 aop 配置 -->
-    <!--<aop:config>-->
-        <!--<aop:pointcut id="serviceMethods" expression="execution(* com.shiro.service..*(..))"/>-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>-->
-    <!--</aop:config>-->
-
-    <!-- 配置使Spring采用CGLIB代理 -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
-
-    <!-- 启用对事务注解的支持 -->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-
-    <!-- Cache配置 -->
-    <cache:annotation-driven cache-manager="cacheManager"/>
-    <bean id="ehCacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
-          p:configLocation="classpath:/config/ehcache.xml"/>
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
-          p:cacheManager-ref="ehCacheManagerFactory"/>
-
 
 </beans>
