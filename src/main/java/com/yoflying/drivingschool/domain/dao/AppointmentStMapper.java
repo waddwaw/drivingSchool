@@ -25,6 +25,9 @@ public interface AppointmentStMapper {
     @Select("SELECT * FROM appointment_st WHERE dsId = #{dsId} and coachId = #{coachId} ORDER BY appointmentDate DESC")
     List<AppointmentSt> findAppointmentStbyDsIDandCoachId(@Param("dsId") Long dsId, @Param("coachId") Long coachId);
 
+    @Select("SELECT * FROM appointment_st WHERE dsId = #{dsId} and coachId = #{coachId} and  testCourse = #{testCourse} ORDER BY appointmentDate DESC")
+    List<AppointmentSt> findAppointmentStbyCoachIdandCoures(@Param("dsId") Long dsId, @Param("coachId") Long coachId, @Param("testCourse") int testCoures);
+
     @Select("SELECT * FROM appointment_st WHERE dsId = #{dsId} and studentsIds LIKE '%${stId}%' ORDER BY appointmentDate DESC")
     List<AppointmentSt> findAppointmentStbyDsIDandStIdAll(@Param("dsId") Long dsId, @Param("stId") Long stId);
 

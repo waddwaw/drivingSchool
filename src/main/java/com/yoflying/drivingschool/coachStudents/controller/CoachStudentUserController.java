@@ -51,7 +51,6 @@ public class CoachStudentUserController extends BaseCsController{
     //  username  password  host Ip地址
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
     @ResponseBody
-    @Transactional
     public JsonResult<Integer> loginPost (@RequestBody ManageToken token) {
         logger.info("coachstudent" + token.getUsername() + "---------" + token.getHost());
 

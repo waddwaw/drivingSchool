@@ -38,6 +38,10 @@ public class AppointmentStImpl implements AppointmentStService {
         return appointmentStMapper.findAppointmentStbysDsIdALL(dsId);
     }
 
+    public List<AppointmentSt> findAppointmentStbyCoachIdandCoures(Long dsId, Long coachId, int testCoures) {
+        return appointmentStMapper.findAppointmentStbyCoachIdandCoures(dsId, coachId, testCoures);
+    }
+
     public int deleteAppointmentStbyIdALL(int id) {
         return appointmentStMapper.deleteAppointmentStbyStatusALL(id);
     }

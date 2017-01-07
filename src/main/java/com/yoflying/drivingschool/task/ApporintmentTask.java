@@ -43,7 +43,7 @@ public class ApporintmentTask {
     public void appointmentTask() {
         day = 0;
         drivingSchools = drivingSchoolService.findDrivingSchoolByStatusAll();
-        while (day < 1) {  // 每次生成一周的预约信息
+        while (day < 7) {  // 每次生成一周的预约信息
             for (DrivingSchool drivingSchool : drivingSchools) {
                 List<CoachStudentUser> coachStudentUsers = coachStudentService.findCoachByDsIdList(drivingSchool.getId());
                 DSSetting dsSetting = dsSettingService.findOneDSSetting(drivingSchool.getId());
