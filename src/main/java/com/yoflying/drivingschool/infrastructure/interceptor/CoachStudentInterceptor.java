@@ -40,13 +40,12 @@ public class CoachStudentInterceptor extends HandlerInterceptorAdapter {
         if (!Objects.isNull(requiresPermissions) || !Objects.isNull(requiresRoles)) {
 
             Subject subject = SecurityUtils.getSubject();
-            CoachStudentUser coachStudent = (CoachStudentUser) subject.getPrincipal();
+            CoachStudentUser coachStudent = null;
             try {
-
+                coachStudent = (CoachStudentUser) subject.getPrincipal();
             }catch (Exception e) {
 
             }
-
             if (Objects.isNull(coachStudent)) {
                 if (Objects.isNull(handlerMethod.getMethodAnnotation(ResponseBody.class))) {
                     response.sendRedirect("/coachstudent/login");
