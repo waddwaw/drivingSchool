@@ -35,4 +35,8 @@ public interface CoachStudentService {
     List<CoachStudentUser> findCoachByDsIdAndNameList(Long dsId, String name);
 
     List<CoachStudentUser> findStByDsIdAndNameList(Long dsId, String name);
+
+    int findCoachTotal(Long dsId);
+
+    int findStudentTotal(Long dsId);
 }

@@ -31,6 +31,14 @@ public interface CoachStudentUserMapper {
             "and name LIKE concat('%',#{name},'%') ORDER BY createTime DESC")
     List<CoachStudentUser> findCoachByDsIdAndNameList(@Param("dsId") Long dsId, @Param("name") String name);
 
+    @Select("SELECT COUNT(*) FROM coach_students WHERE dsId = #{dsId} and discern = 1 and status = 1 " +
+            "ORDER BY createTime DESC")
+    int findCoachTotal(@Param("dsId") Long dsId);
+
+    @Select("SELECT COUNT(*) FROM coach_students WHERE dsId = #{dsId} and discern = 2 and status = 1 " +
+            "ORDER BY createTime DESC")
+    int findStudentTotal(@Param("dsId") Long dsId);
+
     @Select("SELECT * FROM coach_students WHERE dsId = #{dsId} and discern = 2 and status = 1 " +
             "and name LIKE concat('%',#{name},'%') ORDER BY createTime DESC")
     List<CoachStudentUser> findStByDsIdAndNameList(@Param("dsId") Long dsId, @Param("name") String name);

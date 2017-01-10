@@ -60,4 +60,12 @@ public class CoachStudentImpl implements CoachStudentService{
         return coachStudentUserMapper.findStByDsIdAndNameList(dsId, name);
     }
 
+    public int findCoachTotal(Long dsId) {
+        return coachStudentUserMapper.findCoachTotal(dsId);
+    }
+
+    public int findStudentTotal(Long dsId) {
+        return coachStudentUserMapper.findStudentTotal(dsId);
+    }
+
 }

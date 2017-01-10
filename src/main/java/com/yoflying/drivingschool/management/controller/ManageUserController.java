@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.yoflying.drivingschool.domain.model.*;
+import com.yoflying.drivingschool.entity.DSInfoEntity;
 import com.yoflying.drivingschool.infrastructure.realm.PermissionSign;
 import com.yoflying.drivingschool.infrastructure.realm.RoleSign;
 import com.yoflying.drivingschool.management.BaseManageControllet;
@@ -52,14 +53,15 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * 管理员页面登录页面
+     *
      * @param map
      * @return
      */
     @RequestMapping("/login")
-    public String login (ModelMap map) {
+    public String login(ModelMap map) {
 
         //// TODO: 16/12/13 返回login页面
-        ManageUser m  = manageUserService.authentication("", "");
+        ManageUser m = manageUserService.authentication("", "");
         map.put("test", "test");
         return "/manage/login.ftl";
     }
@@ -68,12 +70,13 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * 管理员用户登录 post 请求 可以携带IP地址
+     *
      * @param token
      * @return
      */
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult<String> loginPost (UsernamePasswordToken token) {
+    public JsonResult<String> loginPost(UsernamePasswordToken token) {
         logger.info("manage" + token.getUsername() + "---------" + token.getHost());
 
         if (StringUtils.isEmpty(token.getUsername()) || StringUtils.isEmpty(token.getUsername())) {
@@ -82,7 +85,7 @@ public class ManageUserController extends BaseManageControllet {
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
-        }catch (AuthenticationException e) {
+        } catch (AuthenticationException e) {
             token.clear();
             return new JsonResult<String>("用户密码错误", ErrorDef.USER_PASS_ERROR);
         }
@@ -91,12 +94,13 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * 获取当前管理员信息
+     *
      * @return
      */
     @RequestMapping("/manageInfo")
     @ResponseBody
     @RequiresRoles(RoleSign.ADMIN)
-    public JsonResult<ManageUser> manageInfo () {
+    public JsonResult<ManageUser> manageInfo() {
 
         return new JsonResult<ManageUser>(ErrorDef.SUCCESS, "成功", getManageUser());
     }
@@ -106,9 +110,9 @@ public class ManageUserController extends BaseManageControllet {
 
     @RequestMapping(value = "/index")
     @RequiresRoles(RoleSign.ADMIN)
-    public String index (ModelMap map) {
+    public String index(ModelMap map) {
 
-         //分页demo 目前已经集成
+        //分页demo 目前已经集成
 //        PageHelper.startPage(1, peage);
 //        List<User> users = userMapper.byListUserName(name);
 //        long total  = ((Page) users).getTotal();
@@ -120,6 +124,7 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * 超级管理员创建驾校管理员
+     *
      * @param manageUser
      * @return
      */
@@ -132,6 +137,7 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * 创建教练or 学员
+     *
      * @param coachStudentUser
      * @return
      */
@@ -140,7 +146,7 @@ public class ManageUserController extends BaseManageControllet {
     @ResponseBody
     public JsonResult createCoachSt(@RequestBody @Valid CoachStudentUser coachStudentUser, BindingResult result) {
 
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return getErrors(result);
         }
 
@@ -155,6 +161,7 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * 超级管理员创建驾校
+     *
      * @param drivingSchool
      * @return
      */
@@ -169,6 +176,7 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * 教练请假申请
+     *
      * @param dsLeave
      * @return
      */
@@ -185,6 +193,7 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * 根据驾校id 查找驾校所有学生
+     *
      * @param pageNum
      * @return
      */
@@ -201,6 +210,7 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * discern 为1 对该驾校教练进行模糊搜索 为2 对学员进行模糊搜索
+     *
      * @param
      * @return
      */
@@ -209,7 +219,7 @@ public class ManageUserController extends BaseManageControllet {
     @RequiresRoles(RoleSign.ADMIN)
     public JsonResult searchCoachStList(Integer discern, String name) {
 
-        if ( !(discern <= 2) || !(discern > 0) ||StringUtils.isEmpty(name)) {
+        if (!(discern <= 2) || !(discern > 0) || StringUtils.isEmpty(name)) {
             return new JsonResult("参数传递错误", ErrorDef.SUCCESS);
         }
 
@@ -218,6 +228,7 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * 根据驾校id 查找驾校所有教练
+     *
      * @param pageNum
      * @return
      */
@@ -232,6 +243,7 @@ public class ManageUserController extends BaseManageControllet {
 
     /**
      * 管理员更改驾校配置设置
+     *
      * @param dsSetting
      * @return
      */
@@ -249,7 +261,8 @@ public class ManageUserController extends BaseManageControllet {
 
 
     /**
-     *更改学员绑定教练 or 更改学员当前科目
+     * 更改学员绑定教练 or 更改学员当前科目
+     *
      * @return
      */
     @RequestMapping(value = "/bindCSCUpdate", method = RequestMethod.POST)
@@ -257,12 +270,27 @@ public class ManageUserController extends BaseManageControllet {
     @RequiresRoles(RoleSign.ADMIN)
     public JsonResult bindCoachorStatusCourseUpdate(@RequestBody @Valid CoachStatusCouresModel cscModel, BindingResult result) {
 
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return getErrors(result);
         }
 
         int err = manageServiceFacade.bindCoachorStatusCourseUpdate(getManageUser().getDsId(), cscModel);
 
         return new JsonResult("操作成功", err);
+    }
+
+    /**
+     * 获取驾校基础信息
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequiresRoles(RoleSign.ADMIN)
+    @RequestMapping(value = "/getDSInfo")
+    public JsonResult getDSInfo() {
+
+        DSInfoEntity dsInfoEntity = manageServiceFacade.getDSInfo(getManageUser().getDsId());
+
+        return new JsonResult<DSInfoEntity>(ErrorDef.SUCCESS, "查询成功", dsInfoEntity);
     }
 }

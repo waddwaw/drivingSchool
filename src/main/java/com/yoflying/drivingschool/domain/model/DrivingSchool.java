@@ -15,10 +15,19 @@ public class DrivingSchool extends BaseModel {
     @NotBlank(message = "驾校电话不能为空")
     private String dsPhone;
     private String dsWeb;
+    private String dsAddress;
     private String logo;
     private int status;
     private Timestamp createTime;
     private Timestamp modifyTime;
+
+    public String getDsAddress() {
+        return dsAddress;
+    }
+
+    public void setDsAddress(String dsAddress) {
+        this.dsAddress = dsAddress;
+    }
 
     public Long getId() {
         return id;

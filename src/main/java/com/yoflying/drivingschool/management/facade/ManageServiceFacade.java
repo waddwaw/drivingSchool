@@ -6,6 +6,7 @@ import com.yoflying.drivingschool.constdef.Const;
 import com.yoflying.drivingschool.constdef.ErrorDef;
 import com.yoflying.drivingschool.domain.model.*;
 import com.yoflying.drivingschool.domain.service.*;
+import com.yoflying.drivingschool.entity.DSInfoEntity;
 import com.yoflying.drivingschool.management.model.CoachStatusCouresModel;
 import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.slf4j.Logger;
@@ -37,6 +38,7 @@ public class ManageServiceFacade {
 
     @Autowired
     DSSettingService dsSettingService;
+
 
     public int createManage(ManageUser manageUser) {
 
@@ -111,5 +113,19 @@ public class ManageServiceFacade {
                 coachStatusCouresModel.getCoachId(), coachStatusCouresModel.getCourse());
 
         return err > 0 ? ErrorDef.SUCCESS : ErrorDef.FAILURE;
+    }
+
+    public DSInfoEntity getDSInfo(long dsid) {
+
+        DrivingSchool drivingSchool = drivingSchoolService.findByDrivingSchool(dsid);
+
+        DSInfoEntity dsInfoEntity = new DSInfoEntity();
+        dsInfoEntity.setDsName(drivingSchool.getDsName());
+        dsInfoEntity.setDsLogo(drivingSchool.getLogo());
+        dsInfoEntity.setAddress(drivingSchool.getDsAddress());
+        dsInfoEntity.setCoachTotal(coachStudentService.findCoachTotal(dsid));
+        dsInfoEntity.setStudentTotal(coachStudentService.findStudentTotal(dsid));
+
+        return dsInfoEntity;
     }
 }
