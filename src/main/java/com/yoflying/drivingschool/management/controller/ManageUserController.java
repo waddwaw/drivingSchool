@@ -193,7 +193,9 @@ public class ManageUserController extends BaseManageControllet {
     @RequiresRoles(RoleSign.ADMIN)
     public JsonResult findStudentbyDsIdList(Integer pageNum) {
         ManageUser manageUser = getManageUser();
-
+        if (pageNum != null || pageNum < 1) {
+            pageNum = 1;
+        }
         return manageServiceFacade.findStudentbyDsIdList(manageUser.getDsId(), pageNum);
     }
 
