@@ -41,6 +41,11 @@ public class CoachStudentInterceptor extends HandlerInterceptorAdapter {
 
             Subject subject = SecurityUtils.getSubject();
             CoachStudentUser coachStudent = (CoachStudentUser) subject.getPrincipal();
+            try {
+
+            }catch (Exception e) {
+
+            }
 
             if (Objects.isNull(coachStudent)) {
                 if (Objects.isNull(handlerMethod.getMethodAnnotation(ResponseBody.class))) {
