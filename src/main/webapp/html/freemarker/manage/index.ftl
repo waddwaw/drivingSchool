@@ -1,1 +1,1 @@
-hello
+hello <p>当前在线人数 ${online}</p>

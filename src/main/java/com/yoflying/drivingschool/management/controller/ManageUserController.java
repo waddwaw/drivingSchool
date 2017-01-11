@@ -19,6 +19,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,6 +108,8 @@ public class ManageUserController extends BaseManageControllet {
 
 //    @Autowired
 //    ApporintmentTask apporintmentTask;
+    @Autowired
+    private SessionDAO sessionDAO;
 
     @RequestMapping(value = "/index")
     @RequiresRoles(RoleSign.ADMIN)
@@ -117,6 +120,9 @@ public class ManageUserController extends BaseManageControllet {
 //        List<User> users = userMapper.byListUserName(name);
 //        long total  = ((Page) users).getTotal();
         ManageUser manageUser = getManageUser();
+
+        map.put("online",sessionDAO.getActiveSessions().size());
+
 //        apporintmentTask.appointmentTask();
 
         return "/manage/index.ftl";
