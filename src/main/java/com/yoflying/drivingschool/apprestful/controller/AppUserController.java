@@ -27,7 +27,7 @@ import java.util.UUID;
 /**
  * Created by arvin on 2016/12/21.
  */
-@RequestMapping("/restful/")
+@RequestMapping("/restful")
 @Controller
 public class AppUserController {
     private final Logger logger = LoggerFactory.getLogger(AppUserController.class);

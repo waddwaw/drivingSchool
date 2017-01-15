@@ -33,6 +33,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        logger.debug("authInterceptor 拦截所有请求URL 路径" + request.getRequestURL().toString());
+
         HandlerMethod handlerMethod = (HandlerMethod) handler;
 
         RequiresPermissions requiresPermissions = handlerMethod.getBeanType().getAnnotation(RequiresPermissions.class);
