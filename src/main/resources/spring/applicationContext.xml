@@ -15,19 +15,5 @@
         <property name="basePackage" value="com.yoflying.drivingschool.domain.dao"/>
     </bean>
 
-    <!-- 属性文件位置 -->
-    <!--<bean id="annotationPropertyConfigurer"-->
-          <!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-        <!--<property name="locations">-->
-            <!--<list>-->
-                <!--&lt;!&ndash;<value>classpath:config/jdbc.properties</value>&ndash;&gt;-->
-                <!--&lt;!&ndash;<value>classpath:config/properties/common.properties</value>&ndash;&gt;-->
-                <!--&lt;!&ndash;<value>classpath:config/properties/log4j.properties</value>&ndash;&gt;-->
-                <!--&lt;!&ndash;<value>classpath:config/properties/redis.properties</value>&ndash;&gt;-->
-            <!--</list>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-
 
 </beans>
