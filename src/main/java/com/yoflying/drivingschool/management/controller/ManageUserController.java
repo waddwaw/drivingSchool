@@ -299,4 +299,20 @@ public class ManageUserController extends BaseManageControllet {
 
         return new JsonResult<DSInfoEntity>(ErrorDef.SUCCESS, "查询成功", dsInfoEntity);
     }
+
+    /**
+     * 获取驾校教练课程情况
+     * @return
+     */
+    @ResponseBody
+    @RequiresRoles(RoleSign.ADMIN)
+    @RequestMapping(value = "/dsAppointrentSt")
+    public JsonResult dsAppointrentSt() {
+
+        List<AppointmentSt> appointmentStList = manageServiceFacade.dsAppointrentSt(getManageUser().getDsId());
+
+        return new JsonResult<List<AppointmentSt>> (ErrorDef.SUCCESS, "查询成功", appointmentStList);
+    }
+
+
 }

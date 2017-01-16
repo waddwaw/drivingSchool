@@ -34,6 +34,10 @@ public interface AppointmentStMapper {
     @Select("SELECT * FROM appointment_st WHERE dsId = #{dsId} ORDER BY appointmentDate DESC")
     List<AppointmentSt> findAppointmentStbysDsIdALL(@Param("dsId") Long dsId);
 
+    @Select("SELECT * FROM appointment_st WHERE dsId = #{dsId} and appointmentDate LIKE concat('%',#{adate},'%') " +
+            "ORDER BY appointmentDate DESC")
+    List<AppointmentSt> findAppointmentStbysDsIdToday(@Param("dsId") Long dsId, @Param("adate") String adate);
+
     @Delete("DELETE FROM appointment_st WHERE id = #{id}")
     int deleteAppointmentStbyStatusALL(@Param("id") int id);
 }

@@ -9,11 +9,13 @@ import com.yoflying.drivingschool.domain.service.*;
 import com.yoflying.drivingschool.entity.DSInfoEntity;
 import com.yoflying.drivingschool.management.model.CoachStatusCouresModel;
 import com.yoflying.drivingschool.utils.json.JsonResult;
+import com.yoflying.drivingschool.utils.json.TimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +41,8 @@ public class ManageServiceFacade {
     @Autowired
     DSSettingService dsSettingService;
 
+    @Autowired
+    AppointmentStService appointmentStService;
 
     public int createManage(ManageUser manageUser) {
 
@@ -128,4 +132,13 @@ public class ManageServiceFacade {
 
         return dsInfoEntity;
     }
+
+    public List<AppointmentSt> dsAppointrentSt(long dsId) {
+
+        List<AppointmentSt> appointmentSts = appointmentStService.findAppointmentStbysDsIdToday(dsId, TimeUtils.DateToString(
+                new Date(), TimeUtils.YYYY_MM_DD));
+
+        return appointmentSts;
+    }
+
 }

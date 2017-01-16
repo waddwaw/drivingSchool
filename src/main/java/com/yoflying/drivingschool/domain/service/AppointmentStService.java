@@ -2,6 +2,7 @@ package com.yoflying.drivingschool.domain.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yoflying.drivingschool.domain.model.AppointmentSt;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,6 +26,8 @@ public interface AppointmentStService {
     List<AppointmentSt> findAppointmentStbysDsIdALL(Long dsId);
 
     List<AppointmentSt> findAppointmentStbyCoachIdandCoures(Long dsId, Long coachId, int testCoures);
+
+    List<AppointmentSt> findAppointmentStbysDsIdToday(Long dsId, String adate);
 
     int deleteAppointmentStbyIdALL(int status);
 }
