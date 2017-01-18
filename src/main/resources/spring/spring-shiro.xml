@@ -32,27 +32,7 @@
 		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
 		<property name="sessionDAO" ref="sessionDAO" />
 	</bean>
-	<!-- 会话Cookie模板 -->
-	<!--<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">-->
-		<!--<constructor-arg value="sid" />-->
-		<!--<property name="httpOnly" value="true" />-->
-		<!--&lt;!&ndash; maxAge=-1表示浏览器关闭时失效此Cookie； &ndash;&gt;-->
-		<!--<property name="maxAge" value="10" />-->
-	<!--</bean>-->
-	 <!--<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">-->
-		<!--<constructor-arg value="rememberMe" />-->
-		<!--<property name="httpOnly" value="true" />-->
-		<!--&lt;!&ndash;即记住我的Cookie，保存时长30天；&ndash;&gt;-->
-		<!--<property name="maxAge" value="10" />-->
-	<!--</bean>-->
 
- <!-- rememberMe管理器 -->
-   <!--  <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
-        rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位）
-        <property name="cipherKey"
-                  value="#{T(org.apache.shiro.codec.Base64).decode('3AvVhmFLUs0KTA3Kprsdag==')}"/>
-        <property name="cookie" ref="rememberMeCookie"/>
-    </bean> -->
 	<!-- 安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="securityRealm"/>

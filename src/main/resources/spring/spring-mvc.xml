@@ -53,29 +53,6 @@
         </property>
     </bean>
 
-    <!--<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>-->
-
-    <!--<mvc:annotation-driven>-->
-    <!--<mvc:message-converters>-->
-    <!--<bean  id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
-    <!--&lt;!&ndash; True only for the blog article - a production system would set this to false to reduce-->
-    <!--the number of bytes sent across the wire: &ndash;&gt;-->
-    <!--<property name="prettyPrint" value="true"/>-->
-    <!--<property name="supportedMediaTypes">-->
-    <!--<list>-->
-    <!--<value>text/plain;charset=UTF-8</value>-->
-    <!--<value>application/json;charset=UTF-8</value>-->
-    <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
-    <!--<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>-->
-    <!--</mvc:message-converters>-->
-    <!--</mvc:annotation-driven>-->
-
-
-    <!-- static files, Javascript html images-->
-    <!--<mvc:resources mapping="/contents/**" location="/contents/"/>-->
-    <!--<mvc:resources mapping="/management/**" location="/management/"/>-->
     <!-- 静态资源访问 -->
     <mvc:resources mapping="/html/**" location="/html/"/>
 
@@ -95,13 +72,6 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
-
-
-    <!-- 配置Freemarker屬性文件路徑 -->
-    <!--<bean id="freemarkerConfiguration"        class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
-    <!--<property name="location" value="classpath:conf/freemarker.properties" />-->
-    <!--</bean>-->
 
     <!-- 配置freeMarker模板加載地址 -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -136,14 +106,5 @@
         <!-- 给视图解析器优先级，你可以給之前jsp视图解析器的值配为2 -->
         <property name="order" value="1"/>
     </bean>
-
-    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
-    <!--<property name="exceptionMappings">-->
-    <!--<props>-->
-    <!--<prop key="org.apache.shiro.authz.UnauthorizedException">redirect:/err401</prop>-->
-    <!--<prop key="org.apache.shiro.authz.UnauthenticatedException">redirect:/login</prop>-->
-    <!--</props>-->
-    <!--</property>-->
-    <!--</bean>-->
 
 </beans>
