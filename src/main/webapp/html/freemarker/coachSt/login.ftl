@@ -90,9 +90,9 @@
                 username:account,
                 password:password
             },
-            dataType:'json',//服务器返回json格式数据
-            type:'post',//HTTP请求类型
-            timeout:10000,//超时时间设置为10秒；
+            dataType:'json',
+            type:'post',
+            timeout:10000,
             headers:{'Content-Type':'application/json'},
             success:function(data){
                 if(data.data === 1) {
@@ -105,7 +105,6 @@
                 mui.alert(data.message,"登录失败","确定",function(){},'div');
             },
             error:function(xhr,type,errorThrown){
-                //异常处理；
                 console.log(type);
                 mui.alert('登录失败，稍后重试',"登录失败","确定",function(){},'div');
             }
