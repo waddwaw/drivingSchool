@@ -1,3 +1,4 @@
+<@compress single_line=true>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,3 +115,5 @@
 
 <#include "footer.ftl" />
 </body>
+</html>
+</@compress>
