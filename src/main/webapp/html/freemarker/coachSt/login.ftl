@@ -71,22 +71,42 @@
 <script>
     $("#login").click(function () {
 
+        var account = $("#account").val();
+        var password = $("#password").val();
+
+        if(account.length <= 0){
+            mui.alert("用户名不正确！","登录失败","确定",function(){},'div');
+            return ;
+        }
+
+        if(password <= 0){
+            mui.alert("密码不正确！","登录失败","确定",function(){},'div');
+            return ;
+        }
+
         mui.ajax('/coachstudent/loginPost',{
             data:{
-                username:'1',
-                password:'admin'
+                username:account,
+                password:password
             },
             dataType:'json',//服务器返回json格式数据
             type:'post',//HTTP请求类型
             timeout:10000,//超时时间设置为10秒；
             headers:{'Content-Type':'application/json'},
             success:function(data){
-                console.log(data);
-                mui.alert('登陆成功',"提示","确定",function(){},'div');
+                if(data.data === 1) {
+                    window.location.href = '/coachstudent/coach/index';
+                    return;
+                } else if(data.data === 2) {
+                    window.location.href = '/coachstudent/student/index';
+                    return;
+                }
+                mui.alert(data.message,"登录失败","确定",function(){},'div');
             },
             error:function(xhr,type,errorThrown){
                 //异常处理；
                 console.log(type);
+                mui.alert('登录失败，稍后重试',"登录失败","确定",function(){},'div');
             }
         });
     })

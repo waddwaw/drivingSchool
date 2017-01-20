@@ -1,12 +1,13 @@
 package com.yoflying.drivingschool.coachStudents.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.yoflying.drivingschool.coachStudents.BaseCsController;
 import com.yoflying.drivingschool.coachStudents.facade.CoachStFacade;
+import com.yoflying.drivingschool.coachStudents.model.StudentModel;
 import com.yoflying.drivingschool.constdef.ErrorDef;
 import com.yoflying.drivingschool.domain.model.AppointmentSt;
 import com.yoflying.drivingschool.domain.model.CoachStudentUser;
 import com.yoflying.drivingschool.infrastructure.realm.RoleSign;
-import com.yoflying.drivingschool.task.ApporintmentTask;
 import com.yoflying.drivingschool.utils.json.JsonResult;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,17 @@ public class StudentController extends BaseCsController {
     @Autowired
     CoachStFacade coachStFacade;
 
+    @RequiresRoles(RoleSign.STUDENT)
     @RequestMapping("/index")
     public String index(ModelMap map) {
+
+        CoachStudentUser studentUser = getCoachStudentUser();
+
+        StudentModel studentModel = coachStFacade.getStudentModel(studentUser.getDsId(), studentUser.getCoachId());
+        studentModel.setMyId(studentUser.getId());
+        map.put("studentModel", JSON.toJSONString(studentModel));
+
+        map.put("appointment", JSON.toJSONString(coachStFacade.getAppointmentInfo(studentUser.getDsId(), studentUser.getCoachId(), studentUser.getCourse())));
 
         return "/coachSt/student.ftl";
     }
@@ -40,9 +50,11 @@ public class StudentController extends BaseCsController {
     public JsonResult getAppointment() {
         CoachStudentUser coachStudentUser = getCoachStudentUser();
 
-        List<AppointmentSt> appointmentSts = coachStFacade.getAppointment(coachStudentUser.getDsId(), coachStudentUser.getCoachId(), coachStudentUser.getCourse());
+        List<AppointmentSt> appointmentSts = coachStFacade.getAppointmentInfo(coachStudentUser.getDsId(), coachStudentUser.getCoachId(), coachStudentUser.getCourse());
 //        if (appointmentSts != null && appointmentSts.size() > 0)
         return new JsonResult<List<AppointmentSt>>(ErrorDef.SUCCESS, "返回数据", appointmentSts);
     }
+
+
 
 }
