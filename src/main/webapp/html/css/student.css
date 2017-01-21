@@ -2,5 +2,26 @@
     width:90vw;
     height: 30vw;
     margin: 0 auto;
+    background-color: white;
     position: relative;
+}
+.appointmentInfo {
+    width:90vw;
+    margin: 2vw auto;
+    padding-top: 0.8vw;
+    background-color: white;
+    text-align: center;
+    position: relative;
+}
+
+.appointmentInfo div{
+    width:90vw;
+    height: 10vw;
+    margin: 0.8vw auto;
+    border-bottom:1px dashed #b6b6b6;
+}
+
+.appointent_p {
+    font-size: 16px;
+    line-height: 10vw;
 }

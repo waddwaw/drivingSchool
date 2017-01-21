@@ -9,7 +9,7 @@
 </head>
 <body>
 <div style="width: 95vw; margin: 3vw auto">
-    <div class="mui-content dsInfo" id="dsapp" style=" background-color: white">
+    <div class="mui-content dsInfo" id="dsapp">
         <div style="width: 30%; height: 30vw;  float: left; text-align: center">
             <img src="/html/img/aaa.jpg" style="width: 60%; height: 60%; margin: 22% auto"/>
         </div>
@@ -35,18 +35,12 @@
         </div>
     </div>
 
-    <div class="mui-content">
-        <div class="mui-row">
-            <div class="mui-col-sm-6 mui-col-xs-6">
-                <li class="mui-table-view-cell">
-                    14:00 - 15:00
-                </li>
-            </div>
-            <div class="mui-col-sm-6 mui-col-xs-6">
-                <li class="mui-table-view-cell">
-                    14:00 - 15:00
-                </li>
-            </div>
+    <div class="mui-content appointmentInfo" id="appointmentInfo">
+        <div>
+            <p class="appointent_p"> 2017-1-21 星期一 8：00 - 10:00   <button class="mui-btn mui-btn-primary" >预约</button> </p>
+        </div>
+        <div>
+            <p class="appointent_p"> 2017-1-21 星期一 8：00 - 10:00   <button class="mui-btn" >预约</button> </p>
         </div>
     </div>
 </div>
@@ -63,10 +57,14 @@
     <#--var student = ${student};-->
     <#--var appointment = ${appointment};-->
 
-        var dsapp = new Vue({
-            el: '#dsapp',
-            data: studentModel
-        })
+    var dsapp = new Vue({
+        el: '#dsapp',
+        data: studentModel
+    })
+    for (i = 0 ; i < 20 ; i++) {
+        $("#appointmentInfo").append('<div> <p class="appointent_p"> 2017-1-21 星期一 8：00 - 10:00   <button class="mui-btn mui-btn-primary" >预约</button> </p> </div>');
+    }
+
 
     //
     //    var app2 = new Vue({
