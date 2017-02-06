@@ -60,6 +60,14 @@ public class IndexController {
 
         String uuid = UUID.randomUUID().toString();
         love.setUuid(uuid);
+
+        if(StringUtils.isEmpty(love.getMe()) || StringUtils.isEmpty(love.getYouname()) || StringUtils.isEmpty(love.getLovetitle()) || StringUtils.isEmpty(love.getShowmian()) ||
+                StringUtils.isEmpty(love.getShowmian2()) || StringUtils.isEmpty(love.getShowmian3()) || StringUtils.isEmpty(love.getTime())) {
+            modelMap.put("ret", -1);
+            modelMap.put("uuid", "");
+            return "/love3.ftl";
+        }
+
         int ret = loveMapper.insertLove(love);
 
         modelMap.put("ret", -1);

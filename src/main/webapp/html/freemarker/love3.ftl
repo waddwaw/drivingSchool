@@ -16,6 +16,6 @@
 <#if ret == 0>
     柚飞科技提醒您 网页制作成功点击下发网址进行浏览 并转发给你想转发的人<a href="http://www.yoflying.com/love?uuid=${uuid!''}">http://www.yoflying.com/love?uuid=${uuid!''}</a>
 <#else>
-    柚飞科技提醒您 网页制作失败请勿提交违反国家法律相关的文字 点击下面链接从新制作页面 <a href="https://www.yoflying.com/">http://www.yoflying.com/love</a>
+    柚飞科技提醒您 网页制作失败请勿提交违反国家法律相关的文字 并填写带*的输入框 点击下面链接从新制作页面 <a href="https://www.yoflying.com/">http://www.yoflying.com/love</a>
 </#if>
 </body>
