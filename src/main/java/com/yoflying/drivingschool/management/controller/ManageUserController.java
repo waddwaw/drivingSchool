@@ -248,6 +248,10 @@ public class ManageUserController extends BaseManageControllet {
     public JsonResult findCoachbyDsIdList(Integer pageNum) {
         ManageUser manageUser = getManageUser();
 
+        if (pageNum ==0) {
+            pageNum = 1;
+        }
+
         return manageServiceFacade.findCoachbyDsIdList(manageUser.getDsId(), pageNum);
     }
 

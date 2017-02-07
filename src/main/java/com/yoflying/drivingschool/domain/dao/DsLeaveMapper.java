@@ -16,8 +16,8 @@ import java.util.List;
 @MapperScan
 public interface DsLeaveMapper {
 
-    @Insert("INSERT INTO ds_Leave (dsId, coachId,leaveDate2,leaveDate3,status,modifyTime)" +
-            " VALUES( #{dsId},#{coachId},#{leaveDate2},#{leaveDate3},#{status},NOW())")
+    @Insert("INSERT INTO ds_Leave (dsId, coachId,coachName,leaveDate2,leaveDate3,status,modifyTime)" +
+            " VALUES( #{dsId},#{coachId},#{coachName},#{leaveDate2},#{leaveDate3},#{status},NOW())")
     int insertDsLeave(DsLeave dsLeave);
 
     @Update("UPDATE ds_Leave SET status = #{status}"+
@@ -28,6 +28,6 @@ public interface DsLeaveMapper {
     @Select("SELECT * FROM ds_Leave WHERE dsId = #{dsId} and coachId = #{coachId} and status = 1")
     List<DsLeave> findDsLeavebyDsIDandCoachId(@Param("dsId") Long dsId,@Param("coachId") Long coachId);
 
-    @Select("SELECT * FROM ds_Leave WHERE dsId = #{dsId}")
+    @Select("SELECT * FROM ds_Leave WHERE dsId = #{dsId} ORDER BY modifyTime DESC")
     List<DsLeave> findDsLeavebyDsIdALL(@Param("dsId") Long dsId);
 }

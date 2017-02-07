@@ -19,6 +19,8 @@ public class DsLeave extends BaseModel {
     private String leaveDate2;
     @NotBlank
     private String leaveDate3;
+    @NotBlank
+    private String coachName;
     private int status;
     private Timestamp createTime;
     private Timestamp modifyTime;
@@ -85,6 +87,14 @@ public class DsLeave extends BaseModel {
 
     public void setModifyTime(Timestamp modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public String getCoachName() {
+        return coachName;
+    }
+
+    public void setCoachName(String coachName) {
+        this.coachName = coachName;
     }
 }
 //        `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
