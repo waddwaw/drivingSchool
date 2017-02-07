@@ -5,14 +5,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yoflying.drivingschool.domain.model.*;
 import com.yoflying.drivingschool.domain.service.*;
-import com.yoflying.drivingschool.utils.json.TimeUtils;
+import com.yoflying.drivingschool.utils.TimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,7 +52,7 @@ public class ApporintmentTask {
                     if (outCoachIds != null && outCoachIds.contains(coachStudentUser.getId())) {
                         continue;
                     }
-                    DsLeave dsLeaves = dsLeaveService.findDsLeavebyDsIDandCoachId(drivingSchool.getId(), coachStudentUser.getId());
+                    List<DsLeave> dsLeaves = dsLeaveService.findDsLeavebyDsIDandCoachId(drivingSchool.getId(), coachStudentUser.getId());
                     List<CoachTestaAddress> ctas = coachTestAddressService.findCTAByUserIdAndCoures(coachStudentUser.getId());
                     String cta2 = null;
                     String cta3 = null;
@@ -70,16 +70,39 @@ public class ApporintmentTask {
                     for (int i = 0; i < setting2Arr.size(); i++) {
                         String start = setting2Arr.getJSONObject(i).getString("start");
                         String stop = setting2Arr.getJSONObject(i).getString("stop");
-                        insetApporintment(taskTime, start, stop, cta2, dsLeaves == null ? "" : dsLeaves.getLeaveDate2(),
-                                setting2.getInteger("size"), coachStudentUser.getId(), coachStudentUser.getDsId(), CoachTestaAddress.COURSE2);
+
+                        for (DsLeave dsLeave : dsLeaves) {
+                            Date taskDate = TimeUtils.StringToDate(taskTime);
+                            Date leaveDate = TimeUtils.StringToDate(dsLeave.getLeaveDate2());
+                            if (taskDate == null || leaveDate == null) {
+                                continue;
+                            }
+                            //// TODO: 2017/2/7 这里待验证
+                            if (TimeUtils.isSameDate(taskDate, leaveDate)) {
+                                insetApporintment(taskTime, start, stop, cta2, dsLeaves == null ? "" : dsLeave.getLeaveDate2(),
+                                        setting2.getInteger("size"), coachStudentUser.getId(), coachStudentUser.getDsId(), CoachTestaAddress.COURSE2);
+                                dsLeaveService.updateDsLeave(0, coachStudentUser.getId(), coachStudentUser.getDsId());
+                            }
+                        }
                     }
                     JSONObject setting3 = (JSONObject) JSON.parse(dsSetting.getDsAppointment3());
                     JSONArray setting3Arr = (JSONArray) JSON.parse(setting3.getString("time"));
                     for (int i = 0; i < setting3Arr.size(); i++) {
                         String start = setting3Arr.getJSONObject(i).getString("start");
                         String stop = setting3Arr.getJSONObject(i).getString("stop");
-                        insetApporintment(taskTime, start, stop, cta3, dsLeaves == null ? "" : dsLeaves.getLeaveDate3(),
-                                setting3.getInteger("size"), coachStudentUser.getId(), coachStudentUser.getDsId(), CoachTestaAddress.COURSE3);
+                        for (DsLeave dsLeave : dsLeaves) {
+                            Date taskDate = TimeUtils.StringToDate(taskTime);
+                            Date leaveDate = TimeUtils.StringToDate(dsLeave.getLeaveDate3());
+                            if (taskDate == null || leaveDate == null) {
+                                continue;
+                            }
+                            //// TODO: 2017/2/7 这里待验证
+                            if (TimeUtils.isSameDate(taskDate, leaveDate)) {
+                                insetApporintment(taskTime, start, stop, cta3, dsLeaves == null ? "" : dsLeave.getLeaveDate3(),
+                                        setting3.getInteger("size"), coachStudentUser.getId(), coachStudentUser.getDsId(), CoachTestaAddress.COURSE3);
+                                dsLeaveService.updateDsLeave(0, coachStudentUser.getId(), coachStudentUser.getDsId());
+                            }
+                        }
                     }
                 }
             }

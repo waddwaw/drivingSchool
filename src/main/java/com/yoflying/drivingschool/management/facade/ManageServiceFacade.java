@@ -9,7 +9,7 @@ import com.yoflying.drivingschool.domain.service.*;
 import com.yoflying.drivingschool.entity.DSInfoEntity;
 import com.yoflying.drivingschool.management.model.CoachStatusCouresModel;
 import com.yoflying.drivingschool.utils.json.JsonResult;
-import com.yoflying.drivingschool.utils.json.TimeUtils;
+import com.yoflying.drivingschool.utils.TimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +70,7 @@ public class ManageServiceFacade {
 
         int err = dsLeaveService.insertDsLeave(dsLeave);
 
-        return err > 0 ? ErrorDef.SUCCESS : ErrorDef.FAILURE;
+        return err ;
     }
 
     public JsonResult<List<CoachStudentUser>> findStudentbyDsIdList(Long dsId, int pageNum) {
@@ -93,9 +93,9 @@ public class ManageServiceFacade {
 
     public int settingDrivingconfig(DSSetting dsSetting) {
 
-        dsSettingService.updateDssetting(dsSetting);
+        int err = dsSettingService.updateDssetting(dsSetting);
 
-        return ErrorDef.SUCCESS;
+        return err;
     }
 
     public JsonResult searchCoachStList(Long dsId, String name, int discern) {

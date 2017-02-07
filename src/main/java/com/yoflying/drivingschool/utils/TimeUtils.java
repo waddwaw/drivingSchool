@@ -1,4 +1,4 @@
-package com.yoflying.drivingschool.utils.json;
+package com.yoflying.drivingschool.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,7 +42,8 @@ public class TimeUtils {
 
     /**
      * 将日期转化为日期字符串。失败返回null。
-     * @param date 日期
+     *
+     * @param date     日期
      * @param parttern 日期格式
      * @return 日期字符串
      */
@@ -59,11 +60,48 @@ public class TimeUtils {
 
     /**
      * 获取SimpleDateFormat
+     *
      * @param parttern 日期格式
      * @return SimpleDateFormat对象
      * @throws RuntimeException 异常：非法日期格式
      */
     private static SimpleDateFormat getDateFormat(String parttern) throws RuntimeException {
         return new SimpleDateFormat(parttern);
+    }
+
+    /**
+     * 判断两个时间是否在同一天
+     *
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public static boolean isSameDate(Date date1, Date date2) {
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(date1);
+
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(date2);
+
+        boolean isSameYear = cal1.get(Calendar.YEAR) == cal2
+                .get(Calendar.YEAR);
+        boolean isSameMonth = isSameYear
+                && cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH);
+        boolean isSameDate = isSameMonth
+                && cal1.get(Calendar.DAY_OF_MONTH) == cal2
+                .get(Calendar.DAY_OF_MONTH);
+
+        return isSameDate;
+    }
+
+    public static Date StringToDate(String str) {
+        SimpleDateFormat format = new SimpleDateFormat(YYYY_MM_DD);
+        Date date = null;
+        try {
+            date = format.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 }

@@ -25,7 +25,7 @@ public class DsLeaveServiceImpl implements DsLeaveService{
         return dsLeaveMapper.updateDsLeave(status, coachId, dsId);
     }
 
-    public DsLeave findDsLeavebyDsIDandCoachId(Long dsId, Long coachId) {
+    public List<DsLeave> findDsLeavebyDsIDandCoachId(Long dsId, Long coachId) {
         return dsLeaveMapper.findDsLeavebyDsIDandCoachId(dsId, coachId);
     }
 

@@ -188,13 +188,17 @@ public class ManageUserController extends BaseManageControllet {
      */
     @RequestMapping(value = "/createLeave", method = RequestMethod.POST)
     @ResponseBody
+    @RequiresRoles(RoleSign.ADMIN)  //@RequiresRoles(value = { "admin", "advuser" }, logical = Logical.OR)
     public JsonResult createLeave(@RequestBody @Valid DsLeave dsLeave) {
 
         dsLeave.setDsId(getManageUser().getDsId());
 
         int err = manageServiceFacade.createLeave(dsLeave);
 
-        return new JsonResult<String>("教练请假成功", err);
+        if(err > 0)
+             return new JsonResult<String>("教练请假成功", ErrorDef.SUCCESS);
+
+        return new JsonResult<String>("教练请假失败", ErrorDef.FAILURE);
     }
 
     /**
@@ -261,8 +265,11 @@ public class ManageUserController extends BaseManageControllet {
         dsSetting.setDsId(getManageUser().getDsId());
         //{"time":[{"start":"","stop":""},{"start":"","stop":""}],"size":3}
         int err = manageServiceFacade.settingDrivingconfig(dsSetting);
-
-        return new JsonResult("更改驾校配置设置成功", err);
+        if (err > 0) {
+            return new JsonResult("更改驾校配置设置成功", ErrorDef.SUCCESS);
+        } else {
+            return new JsonResult("更改驾校配置设置失败", ErrorDef.FAILURE);
+        }
     }
 
 
