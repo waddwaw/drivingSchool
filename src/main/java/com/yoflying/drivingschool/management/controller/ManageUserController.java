@@ -263,7 +263,9 @@ public class ManageUserController extends BaseManageControllet {
     @RequiresRoles(RoleSign.ADMIN)
     public JsonResult coachLeaveList(Integer pageNum) {
         ManageUser manageUser = getManageUser();
-
+        if (pageNum == 0) {
+            pageNum = 1;
+        }
         return manageServiceFacade.coachLeaveList(manageUser.getDsId(), pageNum);
     }
 
