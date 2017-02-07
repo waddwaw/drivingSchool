@@ -8,6 +8,11 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 测试 after,before,around,throwing,returning Advice.
@@ -67,6 +72,11 @@ public class AspceJAdvice {
     public Object aroundAdvice(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println("-----aroundAdvice().invoke-----");
         System.out.println(" 此处可以做类似于Before Advice的事情");
+
+//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//        HttpServletRequest request = attributes.getRequest();
+//        HttpServletResponse response = attributes.getResponse();
+//        response.setStatus(401);
 
         //调用核心逻辑
         Object retVal = pjp.proceed();
