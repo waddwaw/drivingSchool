@@ -20,10 +20,15 @@
     <context:component-scan base-package="com.yoflying.drivingschool.**.controller"/>
     <context:component-scan base-package="com.yoflying.drivingschool.exception"/>
     <context:component-scan base-package="com.yoflying.drivingschool.task"/>
+    <context:component-scan base-package="com.yoflying.drivingschool.aop"/>
+
     <!--扫描controller（controller层注入）-->
     <context:annotation-config/>
     <mvc:annotation-driven/>
     <task:annotation-driven/>
+
+    <!-- 启用AspectJ对Annotation的支持 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- 启用shrio授权注解拦截方式 -->
     <aop:config proxy-target-class="true"/>
