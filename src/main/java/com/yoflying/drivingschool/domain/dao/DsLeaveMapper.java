@@ -28,6 +28,6 @@ public interface DsLeaveMapper {
     @Select("SELECT * FROM ds_Leave WHERE dsId = #{dsId} and coachId = #{coachId} and status = 1")
     List<DsLeave> findDsLeavebyDsIDandCoachId(@Param("dsId") Long dsId,@Param("coachId") Long coachId);
 
-    @Select("SELECT * FROM ds_Leave WHERE dsId = #{dsId} and status = 1")
+    @Select("SELECT * FROM ds_Leave WHERE dsId = #{dsId}")
     List<DsLeave> findDsLeavebyDsIdALL(@Param("dsId") Long dsId);
 }

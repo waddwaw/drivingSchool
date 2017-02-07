@@ -251,6 +251,22 @@ public class ManageUserController extends BaseManageControllet {
         return manageServiceFacade.findCoachbyDsIdList(manageUser.getDsId(), pageNum);
     }
 
+
+    /**
+     * 根据驾校id 查找驾校所有教练请假情况
+     *
+     * @param pageNum
+     * @return
+     */
+    @RequestMapping(value = "/coachLeaveList")
+    @ResponseBody
+    @RequiresRoles(RoleSign.ADMIN)
+    public JsonResult coachLeaveList(Integer pageNum) {
+        ManageUser manageUser = getManageUser();
+
+        return manageServiceFacade.coachLeaveList(manageUser.getDsId(), pageNum);
+    }
+
     /**
      * 管理员更改驾校配置设置
      *

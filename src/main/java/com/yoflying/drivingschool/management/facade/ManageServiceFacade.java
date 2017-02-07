@@ -82,6 +82,15 @@ public class ManageServiceFacade {
         return new JsonResult<List<CoachStudentUser>>(ErrorDef.SUCCESS, "查询成功", pageNum, total, studentUsers);
     }
 
+    public JsonResult<List<DsLeave>> coachLeaveList(Long dsId, int pageNum) {
+
+        PageHelper.startPage(pageNum, Const.DEF_PAGE_SIZA);
+        List<DsLeave> dsLeaves = dsLeaveService.findDsLeavebyDsIdALL(dsId);
+        long total  = ((Page) dsLeaves).getTotal();
+
+        return new JsonResult<List<DsLeave>>(ErrorDef.SUCCESS, "查询成功", pageNum, total, dsLeaves);
+    }
+
     public JsonResult<List<CoachStudentUser>> findCoachbyDsIdList(Long dsId, int pageNum) {
 
         PageHelper.startPage(pageNum, Const.DEF_PAGE_SIZA);
